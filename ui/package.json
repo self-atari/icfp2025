@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "typecheck-watch": "tsc -p tsconfig.app.json --noEmit --watch",
+    "tc": "npm run typecheck-watch",
     "lint": "eslint .",
     "preview": "vite preview"
   },
