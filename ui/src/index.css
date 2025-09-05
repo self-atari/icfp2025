@@ -44,8 +44,8 @@ input {
 }
 
 .hex-image {
+  /* Adapted from https://stackoverflow.com/a/78888727 */
   aspect-ratio: cos(30deg);
-  /* clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%); */
   clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
   width: calc(var(--space) * 3);
   background: lightgray;
