@@ -1,0 +1,57 @@
+:root {
+  --space: 100px;
+  --diag-label--y-offset: 0.4;
+  --diag-label--x-offset: 1.2;
+}
+
+.hex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  width: calc(var(--space) * 5);
+}
+
+input {
+  text-align: center;
+  width: calc(var(--space) * 0.8);
+  font-size: calc(var(--space) * 0.2);
+}
+
+.hex .top-row, .hex .bottom-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center;
+  width: 100%;
+  gap: calc(var(--space) * var(--diag-label--x-offset));
+}
+
+.hex .top-row {
+  margin-top: calc(var(--space) * var(--diag-label--y-offset));
+  margin-bottom: calc(var(--space) * var(--diag-label--y-offset) * -1);
+}
+
+.hex .bottom-row {
+  margin-top: calc(var(--space) * var(--diag-label--y-offset) * -1);
+  margin-bottom: calc(var(--space) * var(--diag-label--y-offset));
+}
+
+.hex .middle-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.hex-image {
+  aspect-ratio: cos(30deg);
+  /* clip-path: polygon(50% -50%, 100% 50%, 50% 150%, 0 50%); */
+  clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
+  width: calc(var(--space) * 3);
+  background: lightgray;
+  z-index: 10;
+}
+
+.hex input {
+  z-index: 100;
+}
