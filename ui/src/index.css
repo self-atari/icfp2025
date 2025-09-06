@@ -55,3 +55,25 @@ input {
 .hex input {
   z-index: 100;
 }
+
+.overlap-container {
+  aspect-ratio: cos(30deg);
+  width: calc(var(--space) * 3);
+  position: relative;
+}
+.overlap-container > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.hex-label-container {
+  aspect-ratio: cos(30deg);
+  width: calc(var(--space) * 3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+input.hex-label {
+  font-size: calc(var(--space) * 0.4);
+  width: calc(var(--space) * 1.2);
+}

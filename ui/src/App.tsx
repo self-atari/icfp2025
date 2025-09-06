@@ -9,7 +9,12 @@ function Hex() {
       </div>
       <div className="middle-row">
         <input value={5} />
-        <div className="hex-image"></div>
+        <div className="overlap-container">
+          <div className="hex-image"></div>
+          <div className="hex-label-container">
+            <input className="hex-label"></input>
+          </div>
+        </div>
         <input value={2} />
       </div>
       <div className="bottom-row">
