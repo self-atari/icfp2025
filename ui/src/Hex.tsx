@@ -3,6 +3,7 @@ type EdgeLabels = [string, string, string, string, string, string];
 export interface HexData {
   edgeLabels: EdgeLabels;
   centerLabel: string;
+  disabled: boolean;
 }
 
 interface HexProps {
@@ -25,56 +26,76 @@ export function Hex({ data, onChange, onRemove }: HexProps) {
   }
 
   return (
-    <div className="hex">
-      <button className="remove" onClick={onRemove}>
-        -
-      </button>
-      <div className="top-row">
-        <EdgeInput
-          index={0}
-          value={data.edgeLabels[0]}
-          onChange={(value) => handleEdgeLabelChange(0, value)}
-        />
-        <EdgeInput
-          index={1}
-          value={data.edgeLabels[1]}
-          onChange={(value) => handleEdgeLabelChange(1, value)}
-        />
-      </div>
-      <div className="middle-row">
-        <EdgeInput
-          index={5}
-          value={data.edgeLabels[5]}
-          onChange={(value) => handleEdgeLabelChange(5, value)}
-        />
-        <div className="overlap-container">
-          <div className="hex-image"></div>
-          <div className="hex-label-container">
-            <input
-              className="hex-label"
-              value={data.centerLabel}
-              onChange={(e) => handleCenterLabelChange(e.target.value)}
+    <div className={"hex"}>
+      {data.disabled ? (
+        <>
+          <button
+            onClick={() => {
+              onChange({ ...data, disabled: false });
+            }}
+          >
+            Enable
+          </button>
+        </>
+      ) : (
+        <>
+          <button
+            className="remove"
+            onClick={() => {
+              // disable
+              onChange({ ...data, disabled: true });
+            }}
+          >
+            -
+          </button>
+          <div className="top-row">
+            <EdgeInput
+              index={0}
+              value={data.edgeLabels[0]}
+              onChange={(value) => handleEdgeLabelChange(0, value)}
+            />
+            <EdgeInput
+              index={1}
+              value={data.edgeLabels[1]}
+              onChange={(value) => handleEdgeLabelChange(1, value)}
             />
           </div>
-        </div>
-        <EdgeInput
-          index={2}
-          value={data.edgeLabels[2]}
-          onChange={(value) => handleEdgeLabelChange(2, value)}
-        />
-      </div>
-      <div className="bottom-row">
-        <EdgeInput
-          index={4}
-          value={data.edgeLabels[4]}
-          onChange={(value) => handleEdgeLabelChange(4, value)}
-        />
-        <EdgeInput
-          index={3}
-          value={data.edgeLabels[3]}
-          onChange={(value) => handleEdgeLabelChange(3, value)}
-        />
-      </div>
+          <div className="middle-row">
+            <EdgeInput
+              index={5}
+              value={data.edgeLabels[5]}
+              onChange={(value) => handleEdgeLabelChange(5, value)}
+            />
+            <div className="overlap-container">
+              <div className="hex-image"></div>
+              <div className="hex-label-container">
+                <input
+                  className="hex-label"
+                  value={data.centerLabel}
+                  onChange={(e) => handleCenterLabelChange(e.target.value)}
+                />
+              </div>
+            </div>
+            <EdgeInput
+              index={2}
+              value={data.edgeLabels[2]}
+              onChange={(value) => handleEdgeLabelChange(2, value)}
+            />
+          </div>
+          <div className="bottom-row">
+            <EdgeInput
+              index={4}
+              value={data.edgeLabels[4]}
+              onChange={(value) => handleEdgeLabelChange(4, value)}
+            />
+            <EdgeInput
+              index={3}
+              value={data.edgeLabels[3]}
+              onChange={(value) => handleEdgeLabelChange(3, value)}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }

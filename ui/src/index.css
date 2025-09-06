@@ -1,8 +1,22 @@
 :root {
-  --space: 100px;
+  --space: 70px;
   --diag-label--y-offset: 0.6;
   --diag-label--x-offset: 0.5;
   --side-label--x-offset: 0.5;
+}
+
+.hexes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input {
+  border: 0;
+  background-color: hsla(0, 0%, 100%, 0.3);
+}
+input:focus {
+  outline: 1px solid hsl(210, 100%, 50%);
+  background-color: white;
 }
 
 .hex {
@@ -11,8 +25,10 @@
   align-items: center;
   border: 1px solid black;
   width: calc(var(--space) * 5.5);
+  height: calc(var(--space) * 4.5);
   position: relative;
   margin-top: 8px;
+  margin-right: 8px;
 }
 
 .hex .remove {
@@ -27,7 +43,7 @@
 .hex input {
   text-align: center;
   width: calc(var(--space) * 0.8);
-  font-size: calc(var(--space) * 0.2);
+  font-size: calc(var(--space) * 0.3);
 }
 
 .hex .edge-input-container-2 {
@@ -75,9 +91,11 @@
 
 .hex input {
   z-index: 100;
+  font-weight: bold;
 }
 .hex input::placeholder {
-  color: lightgray;
+  color: hsl(0, 0%, 70%);
+  font-weight: normal;
 }
 
 .hex .edge-input-container {
@@ -103,6 +121,6 @@
   justify-content: center;
 }
 .hex input.hex-label {
-  font-size: calc(var(--space) * 0.4);
+  font-size: calc(var(--space) * 0.5);
   width: calc(var(--space) * 1.2);
 }
