@@ -1,0 +1,126 @@
+
+Ax3 - A
+Ax1 - C
+Cx4 - C
+Cx4 - C
+Cx5 - B
+Bx4 - B
+
+Bx5 - C
+Cx4 - C
+Cx5 - B
+Bx3 - A
+Ax4 - A
+Ax1 - A
+
+Ax2 - B
+Bx3 - D
+Dx4 - B
+Bx5 - C
+Cx0 - B
+Bx5 - C
+
+Cx2 - A
+Ax3 - A
+Ax0 - C
+Cx1 - B
+Bx4 - B
+Bx2 - C
+
+Cx3 - A
+Ax0 - C
+Cx1 - B
+Bx4 - B
+Bx3 - A
+Ax2 - D
+
+Dx0 - B
+Bx4 - B
+Bx3 - A
+Ax1 - A
+Ax4 - A
+Ax3 - A
+
+Ax5 - B
+Bx3 - A
+Ax5 - B
+Bx3 - A
+Ax4 - A
+Ax5 - B
+
+Bx4 - B
+Bx5 - C
+Cx2 - A
+Ax0 - C
+Cx2 - A
+Ax0 - C
+
+Cx1 - B
+Bx2 - A
+Ax3 - A
+Ax4 - A
+Ax5 - B
+Bx1 - A
+
+Ax0 - B
+Bx2 - C
+Cx3 - A
+Ax4 - A
+Ax0 - B
+Bx3 - A
+
+Ax2 - D
+Dx0 - B
+Bx4 - B
+Bx1 - A
+Ax1 - A
+Ax0 - C
+
+Cx3 - A
+Ax4 - A
+Ax0 - B
+Bx1 - A
+Ax0 - B
+Bx2 - C
+
+Cx3 - A
+Ax4 - A
+Ax0 - B
+Bx4 - B
+Bx3 - D
+Dx0 - B
+
+Bx2 - A
+Ax0 - C
+Cx3 - A
+Ax0 - C
+Cx4 - C
+Cx3 - A
+
+Ax4 - A
+Ax3 - A
+Ax4 - A
+Ax2 - D
+Dx1 - B
+Bx4 - B
+
+Bx2 - C
+Cx1 - B
+Bx0 - D
+Dx1 - B
+Bx5 - C
+Cx3 - A
+
+Ax2 - B
+Bx0 - D
+Dx4 - B
+Bx4 - B
+Bx0 - B
+Bx3 - A
+
+Ax1 - A
+Ax4 - A
+Ax3 - A
+Ax0 - B
+Bx1 - A
+Ax0 - B
