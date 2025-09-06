@@ -12,7 +12,7 @@ npm install
 npm run dev
 ```
 
-Then navigate to [localhost:5173](localhost:5173) (or whatever port it says)
+Then navigate to [localhost:5173](http://localhost:5173) (or whatever port it says)
 
 ## Run formatter
 
