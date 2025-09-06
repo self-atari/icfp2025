@@ -86,8 +86,9 @@ interface EdgeInputProps {
 }
 
 function EdgeInput({ index, value, onChange }: EdgeInputProps) {
+  const indexClass = `edge-input-container-${index}`;
   return (
-    <div className="edge-input-container">
+    <div className={`edge-input-container ${indexClass}`}>
       <input
         placeholder={index + ""}
         value={value}

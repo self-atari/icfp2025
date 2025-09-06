@@ -1,7 +1,8 @@
 :root {
   --space: 100px;
-  --diag-label--y-offset: 0.4;
-  --diag-label--x-offset: 1.2;
+  --diag-label--y-offset: 0.6;
+  --diag-label--x-offset: 0.5;
+  --side-label--x-offset: 0.5;
 }
 
 .hex {
@@ -22,6 +23,15 @@
   text-align: center;
   width: calc(var(--space) * 0.8);
   font-size: calc(var(--space) * 0.2);
+}
+
+.hex .edge-input-container-2 {
+  margin-left: calc(var(--space) * var(--side-label--x-offset) * -1);
+  margin-right: calc(var(--space) * var(--side-label--x-offset));
+}
+.hex .edge-input-container-5 {
+  margin-left: calc(var(--space) * var(--side-label--x-offset));
+  margin-right: calc(var(--space) * var(--side-label--x-offset) * -1);
 }
 
 .hex .top-row, .hex .bottom-row {
