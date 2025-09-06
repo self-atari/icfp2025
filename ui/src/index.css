@@ -10,9 +10,15 @@
   align-items: center;
   border: 1px solid black;
   width: calc(var(--space) * 5);
+  position: relative;
 }
 
-input {
+.hex .remove {
+  position: absolute;
+  right: 0;
+}
+
+.hex input {
   text-align: center;
   width: calc(var(--space) * 0.8);
   font-size: calc(var(--space) * 0.2);
@@ -56,24 +62,24 @@ input {
   z-index: 100;
 }
 
-.overlap-container {
+.hex .overlap-container {
   aspect-ratio: cos(30deg);
   width: calc(var(--space) * 3);
   position: relative;
 }
-.overlap-container > * {
+.hex .overlap-container > * {
   position: absolute;
   top: 0;
   left: 0;
 }
-.hex-label-container {
+.hex .hex-label-container {
   aspect-ratio: cos(30deg);
   width: calc(var(--space) * 3);
   display: flex;
   align-items: center;
   justify-content: center;
 }
-input.hex-label {
+.hex input.hex-label {
   font-size: calc(var(--space) * 0.4);
   width: calc(var(--space) * 1.2);
 }

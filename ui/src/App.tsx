@@ -1,37 +1,48 @@
 import { useState } from "react";
+import { useLocalStorage } from "usehooks-ts";
+import { Hex, type HexData } from "./Hex";
 
-function Hex() {
-  return (
-    <div className="hex">
-      <div className="top-row">
-        <input value={0} />
-        <input value={1} />
-      </div>
-      <div className="middle-row">
-        <input value={5} />
-        <div className="overlap-container">
-          <div className="hex-image"></div>
-          <div className="hex-label-container">
-            <input className="hex-label"></input>
-          </div>
-        </div>
-        <input value={2} />
-      </div>
-      <div className="bottom-row">
-        <input value={4} />
-        <input value={3} />
-      </div>
-    </div>
-  );
+interface State {
+  hexes: HexData[];
 }
 
+const blankHex: HexData = {
+  edgeLabels: ["", "", "", "", "", ""],
+  centerLabel: ""
+};
+
 function App() {
-  const [count, setCount] = useState(0);
+  const [state, setState, removeState] =  useLocalStorage<State>("icfp2025--state", {
+    hexes: []
+  });
+
 
   return (
     <>
-      <Hex></Hex>
-      {/* <Hex></Hex> */}
+      <button
+        onClick={() => {
+          setState({ ...state, hexes: [...state.hexes, blankHex] });
+        }}
+      >
+        Add Hex
+      </button>
+      {state.hexes.map((hex, index) => (
+        <Hex
+          key={index}
+          data={hex}
+          onChange={newHex => {
+            const newHexes = [...state.hexes];
+            newHexes[index] = newHex;
+            setState({ ...state, hexes: newHexes });
+          }}
+          onRemove={() => {
+            const newHexes = state.hexes.filter((_, i) => i !== index);
+            setState({ ...state, hexes: newHexes });
+          }}
+        ></Hex>
+      ))}
+      {/* <button */}
+      {/* // <Hex data={blankHex} onChange={() => {}}></Hex> */}
     </>
   );
 }
