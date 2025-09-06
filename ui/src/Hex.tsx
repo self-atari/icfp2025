@@ -13,12 +13,14 @@ interface HexProps {
 
 export function Hex({ data, onChange, onRemove }: HexProps) {
   function handleEdgeLabelChange(index: number, value: string) {
+    value = value.trim();
     const newEdgeLabels = [...data.edgeLabels];
     newEdgeLabels[index] = value;
     onChange({ ...data, edgeLabels: newEdgeLabels as EdgeLabels });
   }
 
   function handleCenterLabelChange(value: string) {
+    value = value.trim();
     onChange({ ...data, centerLabel: value });
   }
 
