@@ -12,11 +12,16 @@
   border: 1px solid black;
   width: calc(var(--space) * 5.5);
   position: relative;
+  margin-top: 8px;
 }
 
 .hex .remove {
   position: absolute;
   right: 0;
+  border: 0;
+  background-color: lightgray;
+  font-size: 14px;
+  padding: 5px 10px;
 }
 
 .hex input {
