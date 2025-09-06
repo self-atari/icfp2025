@@ -14,7 +14,9 @@ assert(len(input_) + 1 == len(output))
 #         print()
 
 for i in range(n):
+    if i % 6 == 0:
+        print()
     start = output[i]
     end = output[i + 1]
     door = input_[i]
-    print(f'{start}d{door} - {end}')
+    print(f'{start}x{door} - {end}')

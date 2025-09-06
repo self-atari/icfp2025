@@ -5,41 +5,43 @@ Bx0 - B
 Bx0 - B
 Bx0 - B
 
-Bx1 - A
-Ax1 - A
-Ax1 - C
+Bx1 - A9
+A9x1 - A8
+A8x1 - C
 Cx1 - B
 Bx1 - D
-Dx1 - B
+Dx1 - B9
 
+-- todo loop!!
+B9x2 - A20
+A20x2 - B
 Bx2 - A
 Ax2 - B
 Bx2 - A
-Ax2 - B
-Bx2 - A
-Ax2 - B
+Ax2 - B20
 
-Bx3 - D
+B20x3 - D
 Dx3 - D
 Dx3 - D
 Dx3 - D
 Dx3 - D
 Dx3 - D
 
-Dx4 - B
-Bx4 - B
-Bx4 - B
-Bx4 - B
-Bx4 - B
-Bx4 - B
+Dx4 - B50
+Bx4 - B51
+Bx4 - B50
+Bx4 - B51
+Bx4 - B50
+Bx4 - B51
 
-Bx5 - C
+B51x5 - C
 Cx5 - B
 Bx5 - C
 Cx5 - B
 Bx5 - C
 Cx5 - B
 
+-- we got to here
 Bx0 - B
 Bx1 - A
 Ax2 - D
@@ -48,13 +50,13 @@ Dx4 - B
 Bx5 - C
 
 Cx1 - B
-Bx2 - A
+B9x2 - A
 Ax3 - A
 Ax4 - A
 Ax5 - B
 Bx0 - B
 
-Bx2 - C
+B8x2 - C
 Cx3 - A
 Ax4 - A
 Ax5 - B
@@ -78,17 +80,17 @@ Dx3 - D
 Dx5 - D
 Dx0 - B
 Bx1 - D
-Dx2 - A
-Ax3 - A
-Ax4 - A
+Dx2 - A9
+A9x3 - A20
+A20x4 - A
 
-Ax0 - B
-Bx0 - B
-Bx0 - B
-Bx0 - B
-Bx0 - B
+A2x0 - B5
+Bx0 - B6
+Bx0 - B5
+Bx0 - B6
+Bx0 - B5
 
-Bx1 - A
+B5x1 - A
 Ax1 - A
 Ax1 - C
 Cx1 - B
@@ -98,21 +100,21 @@ Dx2 - A
 Ax2 - D
 Dx2 - A
 Ax2 - D
-Dx2 - A
+Dx2 - A9
 
-Ax3 - A
-Ax3 - A
-Ax3 - A
-Ax3 - A
-Ax3 - A
+A9x3 - A20
+A20x3 - A21
+Ax3 - A20
+Ax3 - A21
+Ax3 - A20
 
-Ax4 - A
-Ax4 - A
-Ax4 - A
-Ax4 - A
-Ax4 - A
+A20x4 - A2
+A2x4 - A90
+Ax4 - A91
+Ax4 - A90
+Ax4 - A91
 
-Ax5 - B
+A91x5 - B
 Bx5 - C
 Cx5 - B
 Bx5 - C
@@ -121,6 +123,6 @@ Cx5 - B
 Bx5 - C
 Cx4 - C
 Cx3 - A
-Ax2 - B
+A8x2 - B
 Bx1 - D
 Dx0 - B
