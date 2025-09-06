@@ -1,3 +1,16 @@
+const SEARCH_LABEL = 'B';
+const SEARCH_DOOR = 5;
+const SEARCH_DEST = 'C';
+
+const PRINT = {
+  'rooms': true,
+  'query': false,
+  'walk': false
+};
+
+
+
+
 const fs = require('fs');
 const path = require('path');
 
@@ -17,12 +30,11 @@ for (const l of equivsLines) {
   if(l.trimLeft().startsWith('//')) {
     continue;
   }
-  const [from, to] = l.split('=').map(s => s.trim());
-  equivs[from] = to;
+  const matches = l.split('=').map(s => s.trim());
+  for (const m of matches) {
+    equivs[m] = matches[matches.length - 1];
+  }
 }
-
-// char
-let currentLabel = null;
 
 const followAlias = (name, max) => {
   let j = 0;
@@ -42,10 +54,10 @@ const followAlias = (name, max) => {
   return n;
 }
 
-// problem in log5?
-for (const f of [log2]) {
+let currentLabel = null;
+let i = 0;
+for (const f of [log, log2]) {
   const lines = getLines(f);
-  let i = 0;
   for (const l of lines) {
     const [start, end] = l.split(' - ');
     const [label, doorStr] = start.split('x');
@@ -59,43 +71,55 @@ for (const f of [log2]) {
       models[roomName] = { rooms: new Array(6) };
     }
 
+    if (PRINT.walk) {
+      console.log(roomName, 'x', door, '-', end)
+    }
+
     let provisionalName = followAlias(
-      models[roomName]?.rooms[door] ??  `${end}${i + 1}`
+      models[roomName]?.rooms[door] ?? `${end}${i + 1}`
     );
 
-    models[roomName].rooms[door] = provisionalName;
+    const currentExitName = models[roomName].rooms[door];
+    if (undefined === currentExitName) {
+      models[roomName].rooms[door] = provisionalName;
+    } else {
+      equivs[provisionalName] = currentExitName;
+    }
 
-    currentLabel  = provisionalName[0];
     i++;
+    if (i % lines.length !== 0) {
+      currentLabel  = provisionalName[0];
+    } else {
+      currentLabel = null;
+    }
   }
 }
 
 
 
 
-for (const [label, { rooms }] of Object.entries(models)) {
-  console.log(label, rooms);
-}
-console.log();
-
-// QUERY
-const SEARCH_LABEL = 'A';
-const SEARCH_DOOR = 1;
-const SEARCH_DEST = 'D';
-
-for(const [k, v] of Object.entries(models)) {
-  if (k[0] == SEARCH_LABEL &&
-    v.rooms[SEARCH_DOOR] && v.rooms[SEARCH_DOOR][0] == SEARCH_DEST
-  ) {
-    console.log('match', k, v);
+if (PRINT.rooms) {
+  for (const [label, { rooms }] of Object.entries(models)) {
+    console.log(label, rooms);
   }
+  console.log();
 }
 
-for(const [k, v] of Object.entries(models)) {
-  if (k[0] == SEARCH_LABEL &&
-    v.rooms[SEARCH_DOOR] && v.rooms[SEARCH_DOOR][0] != SEARCH_DEST
-  ) {
-    console.log('NOT match', k, v);
+if (PRINT.query) {
+  for(const [k, v] of Object.entries(models)) {
+    if (k[0] == SEARCH_LABEL &&
+      v.rooms[SEARCH_DOOR] && v.rooms[SEARCH_DOOR][0] == SEARCH_DEST
+    ) {
+      console.log('match', k, v);
+    }
+  }
+
+  for(const [k, v] of Object.entries(models)) {
+    if (k[0] == SEARCH_LABEL &&
+      v.rooms[SEARCH_DOOR] && v.rooms[SEARCH_DOOR][0] != SEARCH_DEST
+    ) {
+      console.log('NOT match', k, v);
+    }
   }
 }
 
