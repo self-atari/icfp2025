@@ -26,25 +26,74 @@ export function Hex({ data, onChange, onRemove }: HexProps) {
 
   return (
     <div className="hex">
-      <button className="remove" onClick={onRemove}>-</button>
+      <button className="remove" onClick={onRemove}>
+        -
+      </button>
       <div className="top-row">
-        <input value={data.edgeLabels[0]} onChange={e => handleEdgeLabelChange(0, e.target.value)} />
-        <input value={data.edgeLabels[1]} onChange={e => handleEdgeLabelChange(1, e.target.value)} />
+        <EdgeInput
+          index={0}
+          value={data.edgeLabels[0]}
+          onChange={(value) => handleEdgeLabelChange(0, value)}
+        />
+        <EdgeInput
+          index={1}
+          value={data.edgeLabels[1]}
+          onChange={(value) => handleEdgeLabelChange(1, value)}
+        />
       </div>
       <div className="middle-row">
-        <input value={data.edgeLabels[5]} onChange={e => handleEdgeLabelChange(5, e.target.value)} />
+        <EdgeInput
+          index={5}
+          value={data.edgeLabels[5]}
+          onChange={(value) => handleEdgeLabelChange(5, value)}
+        />
         <div className="overlap-container">
           <div className="hex-image"></div>
           <div className="hex-label-container">
-            <input className="hex-label" value={data.centerLabel} onChange={e => handleCenterLabelChange(e.target.value)} />
+            <input
+              className="hex-label"
+              value={data.centerLabel}
+              onChange={(e) => handleCenterLabelChange(e.target.value)}
+            />
           </div>
         </div>
-        <input value={data.edgeLabels[2]} onChange={e => handleEdgeLabelChange(2, e.target.value)} />
+        <EdgeInput
+          index={2}
+          value={data.edgeLabels[2]}
+          onChange={(value) => handleEdgeLabelChange(2, value)}
+        />
       </div>
       <div className="bottom-row">
-        <input value={data.edgeLabels[4]} onChange={e => handleEdgeLabelChange(4, e.target.value)} />
-        <input value={data.edgeLabels[3]} onChange={e => handleEdgeLabelChange(3, e.target.value)} />
+        <EdgeInput
+          index={4}
+          value={data.edgeLabels[4]}
+          onChange={(value) => handleEdgeLabelChange(4, value)}
+        />
+        <EdgeInput
+          index={3}
+          value={data.edgeLabels[3]}
+          onChange={(value) => handleEdgeLabelChange(3, value)}
+        />
       </div>
+    </div>
+  );
+}
+
+interface EdgeInputProps {
+  index: number;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+function EdgeInput({ index, value, onChange }: EdgeInputProps) {
+  return (
+    <div className="edge-input-container">
+      <input
+        placeholder={index + ""}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+      />
+      <button onClick={() => onChange("")}>-</button>
     </div>
   );
 }

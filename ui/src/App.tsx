@@ -8,14 +8,16 @@ interface State {
 
 const blankHex: HexData = {
   edgeLabels: ["", "", "", "", "", ""],
-  centerLabel: ""
+  centerLabel: "",
 };
 
 function App() {
-  const [state, setState, removeState] =  useLocalStorage<State>("icfp2025--state", {
-    hexes: []
-  });
-
+  const [state, setState, removeState] = useLocalStorage<State>(
+    "icfp2025--state",
+    {
+      hexes: [],
+    },
+  );
 
   return (
     <>
@@ -30,7 +32,7 @@ function App() {
         <Hex
           key={index}
           data={hex}
-          onChange={newHex => {
+          onChange={(newHex) => {
             const newHexes = [...state.hexes];
             newHexes[index] = newHex;
             setState({ ...state, hexes: newHexes });
