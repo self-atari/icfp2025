@@ -14,6 +14,9 @@ input {
   border: 0;
   background-color: hsla(0, 0%, 100%, 0.3);
 }
+input[value=""]:not(:hover) {
+  opacity: 0;
+}
 input:focus {
   outline: 1px solid hsl(210, 100%, 50%);
   background-color: white;

@@ -115,7 +115,7 @@ function EdgeInput({ index, value, onChange }: EdgeInputProps) {
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />
-      <button onClick={() => onChange("")}>-</button>
+      {/* <button onClick={() => onChange("")}>-</button> */}
     </div>
   );
 }
