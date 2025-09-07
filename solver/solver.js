@@ -11,6 +11,15 @@ const not = f => v => !f(v);
 const fs = require('fs');
 const process = require('node:process');
 
+const envFile = '.soenv';
+
+if (!fs.existsSync(envFile)) {
+  console.error(
+    '.soenv not defined in this directory'
+  );
+  process.exit(1);
+}
+
 const method = process.argv[2];
 
 const printHelp = () => {
@@ -57,7 +66,6 @@ const isValidConditionDest = d => {
   return ('_' === d.substring(1) || isValidLetter(letter));
 }
 
-// TODO add ! (!6a_)
 const isValidCondition = c => {
   const firstIsNegation = c[0] === '~';
   const offset = firstIsNegation ? 1 : 0;
@@ -138,19 +146,38 @@ if (['q', 'query'].includes(method)) {
   printHelp();
 }
 
-// TODO should maybe read in logs automatically from an env?
-// (ditto equivs)
-const log = __dirname +'/../primus/log5.txt';
-const log2 = __dirname + '/../primus/log3';
-const equivFile = __dirname + '/../primus/equivs';
-
 const getLines = path => fs.readFileSync(path, 'utf8')
   .split('\n')
   .filter(l => l != '');
 
+const logPaths = [];
+let EQUIVALENCIES_FILE;
+
+const envVars = getLines(envFile);
+
+for (const l of envVars) {
+  const [k, v] = l.split('=').map(s => s.trim());
+  switch (k) {
+    case 'logs[]': 
+      logPaths.push(v);
+      break;
+    case 'equiv':
+      EQUIVALENCIES_FILE = v;
+      break;
+  }
+}
+
+if (logPaths.length === 0 || !EQUIVALENCIES_FILE) {
+  console.error(
+    'Improper .soenv file. Missing either equiv= or logs[]='
+  );
+  process.exit(1);
+}
+
+
 const models = {};
 
-const equivsLines = getLines(equivFile);
+const equivsLines = getLines(__dirname + '/' + JSON.parse(EQUIVALENCIES_FILE));
 const equivs = {};
 
 for (const l of equivsLines) {
@@ -186,8 +213,26 @@ const walk = [];
 let currentLabel = null;
 let prev = null;
 let i = 0;
-for (const f of [log, log2]) {
+let baseLines;
+for (const f of logPaths.map(s => JSON.parse(s))
+  .map(s => __dirname + '/' + s)
+) {
   const lines = getLines(f);
+  if (!baseLines) {
+    baseLines = lines.length;
+  } else {
+    if (lines.length !== baseLines) {
+      console.error(
+        'Length of logs do not match. Expected ' +
+        baseLines +
+        ' but got: ' +
+        lines.length +
+        ' in log file ' +
+        f
+      );
+      process.exit(1);
+    }
+  }
   for (const l of lines) {
     const [start, end] = l.split(' - ');
     const [label, doorStr] = start.split('x');
