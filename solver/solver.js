@@ -1,29 +1,91 @@
 const fs = require('fs');
+const process = require('node:process');
 
-const SEARCH_LABEL = 'A';
-const SEARCH_DOOR = 3;
-const SEARCH_DEST = 'D';
+const method = process.argv[2];
 
-const MERGE_LABEL = 'A';
-const MERGE_NUMBERS = [35, 29];
+const printHelp = () => {
+  console.log("USAGE:");
+  console.log("\tq/query A3 D -- get all As with door 3 pointing to a D (and those that don't)");
+  console.log("\tm/merge A 35 25 21 -- get all learned equivalencies.");
+  console.log("\tp/print -- print current walk/state");
+  console.log("\tg/guess -- print final JSON based on internal state. MUST be finished");
+  console.log("\th/help -- print this message");
+  process.exit(0);
+}
 
-// TODO should maybe read in logs automatically?
-
-// q/query a3 d
-// m/merge a 35 25 21
-// p/print (rooms, walk)
-// g/guess (final)
+if (undefined === method ||
+  method === 'help' || 
+  method === 'h'
+) {
+  printHelp();
+}
 
 const PRINT = {
-  'rooms': 1,
-  'query': 1,
+  'rooms': 0,
+  'query': 0,
   'walk': 0,
   'final': 0,
-  'merge': 1
+  'merge': 0
 };
 
+let SEARCH_LABEL = 'A';
+let SEARCH_DOOR = 0;
+let SEARCH_DEST = 'A';
+
+let MERGE_LABEL = 'A';
+let MERGE_NUMBERS = [0,0]
+
+
+if (['q', 'query'].includes(method)) {
+  const from = process.argv[3];
+  const to = process.argv[4];
+
+  if (!from || !to ||
+    from.length < 2 ||
+    !['a','b','c','d'].includes(from[0].toLowerCase()) ||
+    Number.isNaN(from.substring(1)) ||
+    Number(from.substring(1)) > 5 ||
+    Number(from.substring(1)) < 0 ||
+    !['a','b','c','d'].includes(to)
+  ) {
+    printHelp();
+  }
+
+  SEARCH_LABEL = from[0].toUpperCase();
+  SEARCH_DOOR = Number(from.substring(1));
+  SEARCH_DEST = to.toUpperCase();
+
+  PRINT.query = true;
+} else if (['m', 'merge'].includes(method)) {
+  const letter = process.argv[3];
+  const numbers = process.argv.slice(4);
+
+  if (!['a', 'b', 'c', 'd'].includes(letter.toLowerCase()) ||
+    numbers.some(n => Number.isNaN(n)) ||
+    numbers.length < 2
+  ) {
+    printHelp();
+  }
+
+  MERGE_LABEL = letter.toUpperCase();
+  MERGE_NUMBERS = numbers.map(n => Number(n));
+  MERGE_NUMBERS.sort((a, b) => b - a);
+  
+  PRINT.merge = true;
+} else if (['p', 'print'].includes(method)) {
+  PRINT.rooms = true;
+  PRINT.walk = true;
+} else if (['g', 'guess'].includes(method)) {
+  PRINT.final = true;
+} else {
+  printHelp();
+}
+
+// TODO should maybe read in logs automatically from an env?
+// (ditto equivs)
 const log = __dirname +'/../primus/log5.txt';
 const log2 = __dirname + '/../primus/log3';
+const equivFile = __dirname + '/../primus/equivs';
 
 const getLines = path => fs.readFileSync(path, 'utf8')
   .split('\n')
@@ -31,7 +93,7 @@ const getLines = path => fs.readFileSync(path, 'utf8')
 
 const models = {};
 
-const equivsLines = getLines(__dirname + '/../primus/equivs');
+const equivsLines = getLines(equivFile);
 const equivs = {};
 
 for (const l of equivsLines) {
