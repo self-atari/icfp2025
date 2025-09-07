@@ -6,6 +6,7 @@ const uniqStrings = (strings) => {
   return Object.keys(map);
 }
 
+const not = f => v => !f(v);
 
 const fs = require('fs');
 const process = require('node:process');
@@ -56,9 +57,12 @@ const isValidConditionDest = d => {
   return ('_' === d.substring(1) || isValidLetter(letter));
 }
 
+// TODO add ! (!6a_)
 const isValidCondition = c => {
-  const cond = c[0];
-  const label = c.substring(1);
+  const firstIsNegation = c[0] === '~';
+  const offset = firstIsNegation ? 1 : 0;
+  const cond = c[0 + offset];
+  const label = c.substring(1 + offset);
 
   return ('f' === cond || isValidDoor(Number(cond))) &&
     isValidConditionDest(label);
@@ -78,15 +82,19 @@ const matchesPattern = pattern => lab => {
 }
 
 const getCondFn = c => m => {
-  const cond = c[0];
-  const pattern = c.substring(1);
-  if ('f' === cond) {
+  const firstIsNegation = c[0] === '~';
+  const offset = firstIsNegation ? 1 : 0;
+  const cond = c[0 + offset];
+  const pattern = c.substring(1 + offset);
+
+  const f =  ('f' === cond)
     // checks all froms
-    return m.from.some(matchesPattern(pattern));
-  } else {
+    ? m.from.some(matchesPattern(pattern))
     // is a door
-    return matchesPattern(pattern)(m.rooms[Number(cond)]);
-  }
+    : matchesPattern(pattern)(m.rooms[Number(cond)]);
+
+  // TODO is there some clever way to do this?
+  return firstIsNegation ? !f : f;
 }
 
 if (['q', 'query'].includes(method)) {
@@ -271,7 +279,6 @@ if (PRINT.query) {
 
   const matchQuery = m => FILTER_CONDITIONS.every(f => f(m));
   const and = f1 => f2 => v => f1(v) && f2(v);
-  const not = f => v => !f(v);
 
   const matchingModels = ms.filter(and
     (matchQuery)
