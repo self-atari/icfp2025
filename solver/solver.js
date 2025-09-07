@@ -1,3 +1,12 @@
+const uniqStrings = (strings) => {
+  const map = {};
+  for (const s of strings) {
+    map[s] = true;
+  }
+  return Object.keys(map);
+}
+
+
 const fs = require('fs');
 const process = require('node:process');
 
@@ -5,8 +14,11 @@ const method = process.argv[2];
 
 const printHelp = () => {
   console.error("USAGE:");
-  console.error("\tq/query A3 D -- get all As with door 3 pointing to a D (and those that don't)");
-  console.error("\tm/merge A 35 25 21 -- get all learned equivalencies after merge.");
+  console.error(
+    "\tq/query a_ 1b_ fa10 -- get all As with door 1 pointing to a b that " +
+      "came from a10 (and those that don't match)"
+  );
+  console.error("\tm/merge A 35 25 21 -- get all learned equivalencies after merging A35, A25, and A21.");
   console.error("\tp/print -- print current walk/state");
   console.error("\tg/guess -- print final JSON based on internal state. MUST be finished");
   console.error("\th/help -- print this message");
@@ -28,32 +40,69 @@ const PRINT = {
   'merge': 0
 };
 
-let SEARCH_LABEL = 'A';
-let SEARCH_DOOR = 0;
-let SEARCH_DEST = 'A';
 
 let MERGE_LABEL = 'A';
 let MERGE_NUMBERS = [0,0]
 
+let SEARCH_LABEL = 'A';
+const FILTER_CONDITIONS = [];
+
+const isValidDoor = n => n >= 0 && n < 6;
+const isValidLetter = l => ['a','b','c','d'].includes(l.toLowerCase());
+const splitLabel = l => [l[0], Number(l.substring(1))];
+
+const isValidConditionDest = d => {
+  const [letter, number] = splitLabel(d);
+  return ('_' === d.substring(1) || isValidLetter(letter));
+}
+
+const isValidCondition = c => {
+  const cond = c[0];
+  const label = c.substring(1);
+
+  return ('f' === cond || isValidDoor(Number(cond))) &&
+    isValidConditionDest(label);
+}
+
+const matchesPattern = pattern => lab => {
+  const patternLetter = pattern[0];
+  const patternNumber = pattern.substring(1);
+  if (!lab) {
+    return '_' === patternLetter && '_' === patternNumber;
+  }
+
+  const [l, n] = splitLabel(lab);
+
+  return ('_' === patternLetter || patternLetter.toUpperCase() === l.toUpperCase()) &&
+    ('_' === patternNumber || Number(patternNumber) === n);
+}
+
+const getCondFn = c => m => {
+  const cond = c[0];
+  const pattern = c.substring(1);
+  if ('f' === cond) {
+    // checks all froms
+    return m.from.some(matchesPattern(pattern));
+  } else {
+    // is a door
+    return matchesPattern(pattern)(m.rooms[Number(cond)]);
+  }
+}
 
 if (['q', 'query'].includes(method)) {
   const from = process.argv[3];
-  const to = process.argv[4];
+  const conditions = process.argv.slice(4);
 
-  if (!from || !to ||
+  if (!from ||
     from.length < 2 ||
-    !['a','b','c','d'].includes(from[0].toLowerCase()) ||
-    Number.isNaN(from.substring(1)) ||
-    Number(from.substring(1)) > 5 ||
-    Number(from.substring(1)) < 0 ||
-    !['a','b','c','d'].includes(to)
+    !isValidConditionDest(from) ||
+    !conditions.every(isValidCondition)
   ) {
     printHelp();
   }
 
-  SEARCH_LABEL = from[0].toUpperCase();
-  SEARCH_DOOR = Number(from.substring(1));
-  SEARCH_DEST = to.toUpperCase();
+  conditions.map(getCondFn).forEach(c => FILTER_CONDITIONS.push(c));
+  SEARCH_LABEL = from;
 
   PRINT.query = true;
 } else if (['m', 'merge'].includes(method)) {
@@ -127,6 +176,7 @@ const followAlias = (name, max) => {
 const walk = [];
 
 let currentLabel = null;
+let prev = null;
 let i = 0;
 for (const f of [log, log2]) {
   const lines = getLines(f);
@@ -141,7 +191,11 @@ for (const f of [log, log2]) {
     const roomName = followAlias(`${roomLabel}${i}`);
 
     if (!Object.hasOwn(models, roomName)) {
-      models[roomName] = { rooms: new Array(6) };
+      models[roomName] = { rooms: new Array(6).fill(undefined), label: roomName, from: [] };
+    }
+
+    if (null !== prev) {
+      models[roomName].from.push(prev);
     }
 
     walk.push({
@@ -164,42 +218,75 @@ for (const f of [log, log2]) {
     i++;
     if (i % lines.length !== 0) {
       currentLabel  = provisionalName[0];
+      prev = roomName;
     } else {
       currentLabel = null;
+      prev = null;
     }
   }
+}
+for (const m of Object.values(models)) {
+  m.from = uniqStrings(m.from);
+}
+
+const applyColor = code => s => `\x1b[${code}m${s}\x1b[0m`;
+const colorLabel = (c1, c2) => l => applyColor(c1)(l[0]) + applyColor(c2)(l.substring(1));
+
+const modelToString = m => {
+  const padLabel = l => ((null === l || undefined === l || '' === l)
+    ? '\x1b\x1b[2m< >\x1b[0m  '
+    : `${l}`)
+    .padEnd(5, ' ');
+
+  return `${colorLabel(91, 31)(padLabel(m.label))}: ` +
+    `[${m.rooms.map(padLabel).map(colorLabel(92, 32)).join(', ')}]` + 
+    ` f(${m.from.map(padLabel).map(colorLabel(96, 36)).join(', ')})`;
 }
 
 
 if (PRINT.walk) {
+  console.log('--- walk ---');
   for (const w of walk) {
-    console.log(w.label, 'x', w.doorIndex, '=>', w.result);
+    console.log(
+      applyColor(31)(w.label.padEnd(5)),
+      applyColor(2)('x'),
+      w.doorIndex,
+      applyColor(2)('=>'),
+      applyColor(32)(w.result)
+    );
   }
+  console.log();
 }
 
 if (PRINT.rooms) {
-  for (const [label, { rooms }] of Object.entries(models)) {
-    console.log(label, rooms);
+  console.log('--- rooms ---');
+  for (const m of Object.values(models)) {
+    console.log(modelToString(m));
   }
   console.log();
 }
 
 if (PRINT.query) {
-  for(const [k, v] of Object.entries(models)) {
-    if (k[0] == SEARCH_LABEL &&
-      v.rooms[SEARCH_DOOR] && v.rooms[SEARCH_DOOR][0] == SEARCH_DEST
-    ) {
-      console.log('match', k, v);
-    }
-  }
+  const ms = Object.values(models);
 
-  for(const [k, v] of Object.entries(models)) {
-    if (k[0] == SEARCH_LABEL &&
-      v.rooms[SEARCH_DOOR] && v.rooms[SEARCH_DOOR][0] != SEARCH_DEST
-    ) {
-      console.log('NOT match', k, v);
-    }
-  }
+  const matchQuery = m => FILTER_CONDITIONS.every(f => f(m));
+  const and = f1 => f2 => v => f1(v) && f2(v);
+  const not = f => v => !f(v);
+
+  const matchingModels = ms.filter(and
+    (matchQuery)
+    (m => matchesPattern(SEARCH_LABEL)(m.label))
+  );
+  const nonMatchingModels = ms.filter(and
+    (not(matchQuery))
+    (m => matchesPattern(SEARCH_LABEL)(m.label))
+  );
+
+  console.log('--- match ---');
+  matchingModels.forEach(m => { console.log(modelToString(m)); });
+  console.log();
+  console.log('--- DO NOT match ---');
+  nonMatchingModels.forEach(m => { console.log(modelToString(m)); });
 }
 
 const labelToInt = l => ({
@@ -269,14 +356,6 @@ const resolvePairs = (models) => {
     rooms: ms.map(({ label }) => labelToInt(label)),
     connections: doors
   };
-}
-
-const uniqStrings = (strings) => {
-  const map = {};
-  for (const s of strings) {
-    map[s] = true;
-  }
-  return Object.keys(map);
 }
 
 const merge = (
