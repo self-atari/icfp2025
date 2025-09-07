@@ -4,13 +4,13 @@ const process = require('node:process');
 const method = process.argv[2];
 
 const printHelp = () => {
-  console.log("USAGE:");
-  console.log("\tq/query A3 D -- get all As with door 3 pointing to a D (and those that don't)");
-  console.log("\tm/merge A 35 25 21 -- get all learned equivalencies.");
-  console.log("\tp/print -- print current walk/state");
-  console.log("\tg/guess -- print final JSON based on internal state. MUST be finished");
-  console.log("\th/help -- print this message");
-  process.exit(0);
+  console.error("USAGE:");
+  console.error("\tq/query A3 D -- get all As with door 3 pointing to a D (and those that don't)");
+  console.error("\tm/merge A 35 25 21 -- get all learned equivalencies after merge.");
+  console.error("\tp/print -- print current walk/state");
+  console.error("\tg/guess -- print final JSON based on internal state. MUST be finished");
+  console.error("\th/help -- print this message");
+  process.exit(1);
 }
 
 if (undefined === method ||
