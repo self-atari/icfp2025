@@ -319,7 +319,7 @@ const merge = (
 
       if (x[1] !== y[1] &&
         // protect against running off the end of the walk
-        [x, y].every(l => Object.hasOwn(models, l))
+        [x, y].every(([l, n]) => Object.hasOwn(models, `${l}${n}`))
       ) {
         const xIsGreater = x[1] > y[1];
         q.push({
@@ -384,7 +384,7 @@ if (PRINT.merge) {
     merge(MERGE_LABEL, MERGE_NUMBERS, models, walk)
   );
 
-  console.log(updates.join('\n'));
+  console.log(updates.join('\n') + '\n');
 }
 
 
