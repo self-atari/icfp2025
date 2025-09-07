@@ -3,9 +3,10 @@ const SEARCH_DOOR = 5;
 const SEARCH_DEST = 'C';
 
 const PRINT = {
-  'rooms': true,
+  'rooms': false,
   'query': false,
-  'walk': false
+  'walk': false,
+  'final': true
 };
 
 
@@ -97,7 +98,6 @@ for (const f of [log, log2]) {
 
 
 
-
 if (PRINT.rooms) {
   for (const [label, { rooms }] of Object.entries(models)) {
     console.log(label, rooms);
@@ -123,4 +123,78 @@ if (PRINT.query) {
   }
 }
 
+const labelToInt = l => ({
+  'A': 0,
+  'B': 1,
+  'C': 2,
+  'D': 3
+})[l[0]];
 
+// [from][to] = int list of door pos
+
+// @return { startingRoom, rooms, connections }
+const resolvePairs = (models) => {
+  const ms = Object.entries(models)
+    .map(([k, v]) => ({ ...v, label: k }));
+
+  const modelIndices = {};
+  for (let j = 0; j < ms.length; j++) {
+    modelIndices[ms[j].label] = j;
+  }
+
+  const doorLookup = {};
+  for (const m of ms) {
+    for (let i = 0; i < m.rooms.length; i++) {
+      const to = m.rooms[i];
+      const from = m.label;
+
+      if (!Object.hasOwn(doorLookup, from)) {
+        doorLookup[from] = {};
+      }
+      if (!Object.hasOwn(doorLookup[from], to)) {
+        doorLookup[from][to] = [];
+      }
+
+      doorLookup[from][to].push(i);
+    }
+  }
+
+  const doors = [];
+  for (let i = 0; i < ms.length; i++) {
+    const m = ms[i];
+    for (let j = 0; j < m.rooms.length; j++) {
+      const to = m.rooms[j];
+      const toIndex = modelIndices[to];
+      // TODO temp for incomplete
+      if (!Object.hasOwn(doorLookup, to)) {
+        console.error('MISSING', i, j, to, toIndex);
+        continue;
+      }
+      const doorIndex = doorLookup[to][m.label].shift();
+
+      doors.push({
+        from: {
+          room: i,
+          door: j
+        },
+        to: {
+          room: toIndex,
+          door: doorIndex
+        }
+      });
+    }
+  }
+
+  return {
+    startingRoom: modelIndices[ms[0].label],
+    rooms: ms.map(({ label }) => labelToInt(label)),
+    connections: doors
+  };
+}
+
+if (PRINT.final) {
+  console.log(JSON.stringify({
+    id: "prendradjaja@gmail.com hkRpqR6OKKIWypTz2HSNQw",
+    map: resolvePairs(models)
+  }, null, 1));
+}

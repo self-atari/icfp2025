@@ -1,0 +1,16 @@
+
+
+{
+  "rooms": [0,2,1,1,0,3],
+  "connections": [
+    {
+      "from": {
+        "room": 0,
+        "door": 0
+      },
+      "to": {
+        "room": ,
+        "door"
+      }
+  ]
+}
