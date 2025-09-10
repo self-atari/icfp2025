@@ -8,14 +8,14 @@ const printUsage = () => {
   process.exit(1);
 }
 
-const [pathsFile, responsesFile] = process.argv.slice(3);
+const [pathsFile, responsesFile] = process.argv.slice(2);
 if (!pathsFile || !responsesFile) {
   printUsage();
 }
 
 if (!fs.existsSync('.soenv')) {
   fs.appendFileSync('.equiv', '');
-  fs.appendFileSync('.soenv', 'equiv=".equiv"');
+  fs.appendFileSync('.soenv', 'equiv=".equiv"\n');
 }
 
 const [pathsJson, responsesJson] = [pathsFile, responsesFile]
@@ -33,7 +33,8 @@ if (responses.length !== paths.length) {
 }
 for (let i = 0; i < paths.length; i++) {
   const [p, r] = [paths, responses].map(l => l[i]);
-  if (p.length !== r.length + 1) {
+
+  if (p.length !== r.length - 1) {
     throw new Error(
       'Path does not match response length'
     );
@@ -44,8 +45,8 @@ for (let i = 0; i < paths.length; i++) {
 const toLetter = x => 'ABCD'[x];
 
 // int arr
-const getString(path, resp) => {
-  if (path.length !== resp.length + 1) {
+const getString = (path, resp) => {
+  if (path.length !== resp.length - 1) {
     throw new Error(
       'Path does not match response length'
     );
@@ -63,12 +64,12 @@ const getString(path, resp) => {
 const files = [];
 
 for (let j = 0; j < paths.length; j++) {
-  const [p, r] = [paths, responses].map(l => l[i]);
+  const [p, r] = [paths, responses].map(l => l[j]);
   // TODO allow for override?
   const uuid = crypto.randomUUID();
   const fileName = `.solog-${uuid}`;
   files.push(fileName);
-  fs.appendFileSync('.soenv', `logs[]="${fileName}"`);
+  fs.appendFileSync('.soenv', `logs[]="${fileName}"\n`);
   fs.appendFileSync(fileName, getString(p, r));
 }
 
