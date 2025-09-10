@@ -1,5 +1,5 @@
-This year, my friend [Pandu](https://github.com/prendradjaja) and [I](https://github.com/eswitbeck) participated in the [ICFP]
-(International Conference of Functional Programming) contest, a 72 hour
+This year, my friend [Pandu](https://github.com/prendradjaja) and [I](https://github.com/eswitbeck) participated in the [ICFP
+(International Conference of Functional Programming) contest](https://icfpcontest2025.github.io/), a 72 hour
 programming competition that runs annually. Despite the name, competition
 problems aren't _necessarily_ related to functional programming, although they
 sometimes include functional \~flavor\~ to acknowledge the subject of the
