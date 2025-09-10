@@ -184,7 +184,8 @@ we know which door 3 goes with which door 1? Our notes started to get a little
 more convoluted.
 
 ![Several scattered hexagons with in pencil with annotations](primus_notes.jpg)<br />
-0-indexing makes describing problems harder _and_ doors harder to keep track of!
+_0-indexing makes describing problems harder *and* doors harder to keep track
+of!_
 
 That seemed like a good place to start actually writing code. We knew a simple
 app would make this process a lot simpler and faster. We also knew that we could
