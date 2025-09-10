@@ -1,4 +1,4 @@
-This year, my friend [Pandu](link) and [I](link) participated in the [ICFP]
+This year, my friend [Pandu](https://github.com/prendradjaja) and [I](https://github.com/eswitbeck) participated in the [ICFP]
 (International Conference of Functional Programming) contest, a 72 hour
 programming competition that runs annually. Despite the name, competition
 problems aren't _necessarily_ related to functional programming, although they
@@ -23,7 +23,7 @@ allows you to go back and try your hand even if you missed it. We did just that
 24-hour practice session in advance to set up our tooling and figure out what
 works well.
 
-![Practice session](IMAGE SRC)
+![Practice session sequence](practice.gif)
 Pair programming with, as expected, several Go breaks
 
 What we learned was 1) despite differing language preferences, we could
@@ -63,7 +63,7 @@ we get a better score for using fewer plans. We do this by messaging the
 competion organizers' server. But be careful! If you guess wrong or change which
 problem you're looking at, the rooms get re-randomized.
 
-[IMAGE]
+![A map of four hexagon rooms with lines between sides](aedificium.png)
 The representation we're given of a simple complete map
 
 Coincidentally, the setup is very reminiscent of the kind of text adventure
@@ -121,7 +121,8 @@ learned. We had 54 steps to choose. Why not just pick some repeating patterns of
 6 and piece them together? We typed out our plan, sent it to the server, and we
 were off to the races!
 
-[img]
+![Both of us sitting at a kitchen table with pads of paper and a
+laptop](pen_and_paper.jpg)
 To start, we picked up that oldest of programming languages: pen and paper.
 
 A few things were immediately evident. First, if you always follow the same door,
@@ -131,13 +132,13 @@ you were able to find your way back to the original room. Any more will just
 repeat the same thing! Second, alternating loops were difficult to disambiguate:
 were you walking back and forth between two rooms? Four?
 
-[img]
+![Depiction of a two loop vs four loop](loop.jpg)
 
 We also spooked ourselves with the realization that sometimes there was never a
 way to tell two layouts apart. If you're in a room and both doors get you back in
 the same room, did the doors connect to each other? Or were they both self-doors?
 
-[disambiguation]
+![Two solutions for the same problem](disambiguation.png)
 
 Luckily, as we checked, either solution was considered correct. So all we had to
 do was find out where every door went, and then, when multiple doors connected
@@ -147,13 +148,13 @@ To make things more readable, we paired our plan with the result and adopted our
 naming scheme of 'A', 'B'... so we could just read what we had done in a text
 editor.
 
-[img]
+![Text editor with lines of - A => 1, - B => 0, ...](probatio.png)
 Vim: that most practical of programming langauges
 
 From there it wasn't too hard to work out a solution by looking through the list;
 when you only have three rooms, every letter can only refer to one room!
 
-[img]
+![Sketch on paper of a hexagon with each edge labeled](probatio_solution.jpg)
 Alas, no points for the tutorial. Not on the board yet
 
 ### Primus
@@ -182,7 +183,7 @@ A's that don't line up in door 3. These pairs are obviously the same, but how do
 we know which door 3 goes with which door 1? Our notes started to get a little
 more convoluted.
 
-[img]
+![Several scattered hexagons with in pencil with annotations](primus_notes.jpg)
 O-indexing makes describing problems harder _and_ doors harder to keep track of!
 
 That seemed like a good place to start actually writing code. We knew a simple
@@ -218,7 +219,7 @@ obvious to us how that would work. Convinced our UI and enough elbow grease coul
 go the distance, I forged ahead trying to think through the problem until an
 unfortunate 4am without success.
 
-[gif]
+![Sequence of photos ending in sitting at a desk until late](dayof.gif)
 Descent into madness
 
 ### Day 2
@@ -240,7 +241,9 @@ turned out, winning teams did in fact just use completely random walks. Clearly,
 we should have tried the more obvious strategy! With a second plan execution, I
 returned to work while Pandu gave some more consideration to backtracking.
 
-[img]
+![Screenshot of a tool that lists hundreds of rooms with labels A10, A11, paired
+with arrays of 6
+labels](progress.png)
 Making progress!
 
 To my delight, within about two hours of this (only slightly less) manual work, a
@@ -249,7 +252,8 @@ giving up) so we were only cautiously optimistic. Did this approach really work?
 All we could do was pick which doors went with each other and submit. And...
 success!!
 
-[img]
+![A sketch of six hexagons with all edges connected via
+lines](primus_solution.jpg)
 ON. THE. BOARD.
 
 After this point, we took a long break. It was clear the proofs would get harder
@@ -267,7 +271,7 @@ properties (like, which rooms had a label of A, went through door 1 to a room
 with a label of B...). And it would be nice to have a program that would do the
 door-pair-picking for me.
 
-![secundus2.png]()
+![The earlier CLI, now with color coding and automated merging commands](secundus_2.png)
 The CLI gets a facelift.
 
 I felt satisfied when I determined that the new tools allowed me to start over
@@ -282,7 +286,7 @@ and short on time to prove that my merges were correct and just started making
 educated guesses. Alas, this approach did finally hit a brick wall and I gave up
 for the evening.
 
-![secundus_fail.png]()
+![An exception thrown in the CLI labeled 'Contradiction'](secundus_fail.png)
 If the rule you followed brought you to this, of what use was the rule?
 
 ### Day four
