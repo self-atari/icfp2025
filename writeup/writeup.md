@@ -233,7 +233,7 @@ then only kept track of which were identical? A CLI program could at least make
 sure we didn't forget to do any of those merges. Plus, now that we had the mental
 picture of hexagons, we could just think of them directly as lists of room names.
 (It does seem like Pandu and I have our own
-[carzinization](https://xkcd.com/2418/) tendencies when making tools. For him,
+[carcinization](https://xkcd.com/2418/) tendencies when making tools. For him,
 it's graphical UIs; for me, it's CLIs.)
 
 It also started to look like our plan hadn't hit every door. Well, armed with
