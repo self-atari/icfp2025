@@ -198,6 +198,8 @@ the organizers' code or, more likely, user error--we were working under the
 mistaken impression that every time we talked to the server our score got worse,
 even if we reset.)
 
+![Working on on-screen hexagons with annotations](GUI.jpg)
+
 Less than an hour later, we put our new tool to the test. And yes, we confirmed,
 it was much easier to click one button than draw hexagons over and over.
 
