@@ -23,8 +23,8 @@ allows you to go back and try your hand even if you missed it. We did just that
 24-hour practice session in advance to set up our tooling and figure out what
 works well.
 
-![Practice session sequence](practice.gif)
-Pair programming with, as expected, several Go breaks
+![Practice session sequence](practice.gif)<br />
+_Pair programming with, as expected, several Go breaks_
 
 What we learned was 1) despite differing language preferences, we could
 collaborate in TypeScript as our *lingua franca* and 2) there was a very real
@@ -63,8 +63,8 @@ we get a better score for using fewer plans. We do this by messaging the
 competion organizers' server. But be careful! If you guess wrong or change which
 problem you're looking at, the rooms get re-randomized.
 
-![A map of four hexagon rooms with lines between sides](aedificium.png)
-The representation we're given of a simple complete map
+![A map of four hexagon rooms with lines between sides](aedificium.png)<br />
+_The representation we're given of a simple complete map_
 
 Coincidentally, the setup is very reminiscent of the kind of text adventure
 computer games I remember playing as a child:
@@ -122,8 +122,8 @@ learned. We had 54 steps to choose. Why not just pick some repeating patterns of
 were off to the races!
 
 ![Both of us sitting at a kitchen table with pads of paper and a
-laptop](pen_and_paper.jpg)
-To start, we picked up that oldest of programming languages: pen and paper.
+laptop](pen_and_paper.jpg)<br />
+_To start, we picked up that oldest of programming languages: pen and paper._
 
 A few things were immediately evident. First, if you always follow the same door,
 you're guaranteed to stop learning anything new after you've followed it as many
@@ -148,14 +148,14 @@ To make things more readable, we paired our plan with the result and adopted our
 naming scheme of 'A', 'B'... so we could just read what we had done in a text
 editor.
 
-![Text editor with lines of - A => 1, - B => 0, ...](probatio.png)
-Vim: that most practical of programming langauges
+![Text editor with lines of - A => 1, - B => 0, ...](probatio.png)<br />
+_Vim: that most practical of programming langauges_
 
 From there it wasn't too hard to work out a solution by looking through the list;
 when you only have three rooms, every letter can only refer to one room!
 
-![Sketch on paper of a hexagon with each edge labeled](probatio_solution.jpg)
-Alas, no points for the tutorial. Not on the board yet
+![Sketch on paper of a hexagon with each edge labeled](probatio_solution.jpg)<br />
+_Alas, no points for the tutorial. Not on the board yet_
 
 ### Primus
 
@@ -183,8 +183,8 @@ A's that don't line up in door 3. These pairs are obviously the same, but how do
 we know which door 3 goes with which door 1? Our notes started to get a little
 more convoluted.
 
-![Several scattered hexagons with in pencil with annotations](primus_notes.jpg)
-O-indexing makes describing problems harder _and_ doors harder to keep track of!
+![Several scattered hexagons with in pencil with annotations](primus_notes.jpg)<br />
+0-indexing makes describing problems harder _and_ doors harder to keep track of!
 
 That seemed like a good place to start actually writing code. We knew a simple
 app would make this process a lot simpler and faster. We also knew that we could
@@ -219,8 +219,8 @@ obvious to us how that would work. Convinced our UI and enough elbow grease coul
 go the distance, I forged ahead trying to think through the problem until an
 unfortunate 4am without success.
 
-![Sequence of photos ending in sitting at a desk until late](dayof.gif)
-Descent into madness
+![Sequence of photos ending in sitting at a desk until late](dayof.gif)<br />
+_Descent into madness_
 
 ### Day 2
 
@@ -241,10 +241,8 @@ turned out, winning teams did in fact just use completely random walks. Clearly,
 we should have tried the more obvious strategy! With a second plan execution, I
 returned to work while Pandu gave some more consideration to backtracking.
 
-![Screenshot of a tool that lists hundreds of rooms with labels A10, A11, paired
-with arrays of 6
-labels](progress.png)
-Making progress!
+![Screenshot of a tool that lists hundreds of rooms with labels A10, A11, paired with arrays of 6 labels](progress.png)<br />
+_Making progress!_
 
 To my delight, within about two hours of this (only slightly less) manual work, a
 solution emerged! We were both exhausted by this point (and even considering
@@ -253,8 +251,8 @@ All we could do was pick which doors went with each other and submit. And...
 success!!
 
 ![A sketch of six hexagons with all edges connected via
-lines](primus_solution.jpg)
-ON. THE. BOARD.
+lines](primus_solution.jpg)<br />
+_ON. THE. BOARD._
 
 After this point, we took a long break. It was clear the proofs would get harder
 and harder with more rooms, Pandu was now done working on the contest, and I knew
@@ -271,8 +269,8 @@ properties (like, which rooms had a label of A, went through door 1 to a room
 with a label of B...). And it would be nice to have a program that would do the
 door-pair-picking for me.
 
-![The earlier CLI, now with color coding and automated merging commands](secundus_2.png)
-The CLI gets a facelift.
+![The earlier CLI, now with color coding and automated merging commands](secundus_2.png)<br />
+_The CLI gets a facelift_
 
 I felt satisfied when I determined that the new tools allowed me to start over
 and find a _Primus_ solution in about 10 minutes.
