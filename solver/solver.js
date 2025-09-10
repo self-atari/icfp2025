@@ -177,7 +177,7 @@ if (logPaths.length === 0 || !EQUIVALENCIES_FILE) {
 
 const models = {};
 
-const equivsLines = getLines(__dirname + '/' + JSON.parse(EQUIVALENCIES_FILE));
+const equivsLines = getLines(JSON.parse(EQUIVALENCIES_FILE));
 const equivs = {};
 
 for (const l of equivsLines) {
@@ -215,7 +215,6 @@ let prev = null;
 let i = 0;
 let baseLines;
 for (const f of logPaths.map(s => JSON.parse(s))
-  .map(s => __dirname + '/' + s)
 ) {
   const lines = getLines(f);
   if (!baseLines) {
@@ -316,7 +315,7 @@ if (PRINT.rooms) {
   for (const m of Object.values(models)) {
     console.log(modelToString(m));
   }
-  console.log();
+  console.log(Object.values(models).length);
 }
 
 if (PRINT.query) {
@@ -334,11 +333,24 @@ if (PRINT.query) {
     (m => matchesPattern(SEARCH_LABEL)(m.label))
   );
 
-  console.log('--- match ---');
-  matchingModels.forEach(m => { console.log(modelToString(m)); });
-  console.log();
   console.log('--- DO NOT match ---');
   nonMatchingModels.forEach(m => { console.log(modelToString(m)); });
+  console.log();
+  console.log('--- match ---');
+  matchingModels.forEach(m => { console.log(modelToString(m)); });
+
+  if (matchingModels.length > 1 &&
+    matchingModels.every(m => m.label[0] === matchingModels[0].label[0])
+  ) {
+    const numbers = matchingModels.map(m => m.label.substring(1))
+      .map(Number);
+    numbers.sort((a, b) => b - a);
+    
+    console.log(
+      `s m ${matchingModels[0].label[0]} ` +
+      numbers.join(' ')
+    );
+  }
 }
 
 const labelToInt = l => ({
@@ -460,52 +472,56 @@ const merge = (
       }
     }
 
-    if (firstPass) {
-      const exits = {};
-      for (let k = 0; k < walk.length - 1; k++) {
-        const [curr, next] = [k, k + 1].map(n => walk[n]);
+    // TODO bad logic
+    // if (firstPass) {
+    //   const exits = {};
+    //   for (let k = 0; k < walk.length - 1; k++) {
+    //     const [curr, next] = [k, k + 1].map(n => walk[n]);
 
-        const { label, doorIndex } = curr;
-        const { label: result } = next;
-        if (k % (getLines(log).length - 1) === 0) {
-          continue;
-        }
-        
-        const key = `${label}x${doorIndex}`;
-        if (!Object.hasOwn(exits, key)) {
-          exits[key] = [result];
-        } else {
-          exits[key].push(result);
-        }
-      }
+    //     const { label, doorIndex } = curr;
+    //     const { label: result } = next;
+    //     if (k % (getLines(JSON.parse(logPaths[0])).length - 1) === 0) {
+    //       continue;
+    //     }
+    //     
+    //     const key = `${label}x${doorIndex}`;
+    //     if (!Object.hasOwn(exits, key)) {
+    //       exits[key] = [result];
+    //     } else {
+    //       exits[key].push(result);
+    //     }
+    //   }
 
-      for (const dests of Object.values(exits)) {
-        const uniqDests = uniqStrings(dests);
-        if (uniqDests.length > 1) {
-          uniqDests.sort(
-            (a, b) => Number(b.substring(1)) - Number(a.substring(1))
-          );
+    //   for (const dests of Object.values(exits)) {
+    //     const uniqDests = uniqStrings(dests);
+    //     if (uniqDests.length > 1) {
+    //       uniqDests.sort(
+    //         (a, b) => Number(b.substring(1)) - Number(a.substring(1))
+    //       );
 
-          const destEnd = uniqDests[uniqDests.length - 1];
-          const rest = uniqDests.slice(0, uniqDests.length - 1)
-            // protect against running off the end of the walk
-            .filter(l => Object.hasOwn(models, l));
+    //       const destEnd = uniqDests[uniqDests.length - 1];
+    //       const rest = uniqDests.slice(0, uniqDests.length - 1)
+    //         // protect against running off the end of the walk
+    //         .filter(l => Object.hasOwn(models, l));
 
-          rest.forEach(d => {
-            q.push({
-              from: d,
-              to: destEnd
-            });
-          });
-        }
-      }
+    //       rest.forEach(d => {
+    //         q.push({
+    //           from: d,
+    //           to: destEnd
+    //         });
+    //       });
+    //     }
+    //   }
 
-      firstPass = false;
-    }
+    //   firstPass = false;
+    // }
 
 
     statements.push(`${from}=${to}`);
   }
+  statements.push(
+    numbers.map(n => `${letter}${n}`).join('=')
+  );
 
   return statements;
 }
@@ -515,7 +531,11 @@ if (PRINT.merge) {
     merge(MERGE_LABEL, MERGE_NUMBERS, models, walk)
   );
 
-  console.log(updates.join('\n') + '\n');
+  const mergeString = updates.join('\n') + '\n';
+
+  fs.appendFileSync(JSON.parse(EQUIVALENCIES_FILE), mergeString);
+
+  console.log(mergeString);
 }
 
 
