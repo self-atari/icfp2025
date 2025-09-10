@@ -285,8 +285,8 @@ and short on time to prove that my merges were correct and just started making
 educated guesses. Alas, this approach did finally hit a brick wall and I gave up
 for the evening.
 
-![An exception thrown in the CLI labeled 'Contradiction'](secundus_fail.png)
-If the rule you followed brought you to this, of what use was the rule?
+![An exception thrown in the CLI labeled 'Contradiction'](secundus_fail.png)<br />
+_If the rule you followed brought you to this, of what use was the rule?_
 
 ### Day four
 
