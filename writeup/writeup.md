@@ -31,7 +31,7 @@ works well.
     <img
         src="practice.gif"
         alt="Practice session sequence"
-        width="50%"
+        width="75%"
     />
 </p>
 <p align="center"><em>
@@ -76,7 +76,7 @@ if you submit an incorrect map, the rooms get shuffled and you have to start ove
       <img
         src="aedificium.png"
         alt="A map of four hexagon rooms with lines between sides"
-        width="50%"
+        width="75%"
         		min-width="340px"
 		max-width="600px"
       />
@@ -141,7 +141,7 @@ pick some repeating patterns and see what we learned.
       <img
         src="pen_and_paper.jpg"
         alt="Both of us sitting at a kitchen table with pads of paper and a laptop"
-        width="50%"
+        width="75%"
         		min-width="340px"
 		max-width="600px"
       />
@@ -159,7 +159,7 @@ were you walking back and forth between two rooms? Four?
   <img
     src="loop.jpg"
     alt="Depiction of a two loop vs four loop, both yielding 0-1-0-1-0..."
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -173,7 +173,7 @@ the same room, did the doors connect to each other? Or were they both self-doors
   <img
     src="disambiguation.png"
     alt="Two solutions for the same problem"
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -189,7 +189,7 @@ To make things more readable, we formatted what we learned in a text editor.
   <img
     src="probatio.png"
     alt="Text editor with lines of - A => 1, - B => 0, ..."
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -203,7 +203,7 @@ when you only have three rooms, every letter can only refer to one room!
   <img
     src="probatio_solution.jpg"
     alt="Sketch on paper of a hexagon with each edge labeled"
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -241,7 +241,7 @@ to get a little more convoluted.
   <img
     src="primus_notes.jpg"
     alt="Several scattered hexagons with in pencil with annotations"
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -267,7 +267,7 @@ out our own version of the competition server for testing.[^server_mistake]
   <img
     src="GUI.jpg"
     alt="Working on on-screen hexagons with annotations"
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -294,7 +294,7 @@ go the distance, I unfortunatley forged ahead until 4am without success.
   <img
     src="dayof.gif"
     alt="Sequence of photos ending in sitting at a desk until late"
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -319,7 +319,7 @@ could just think of them directly as lists of room names.[^carcinization]
   <img
     src="progress.png"
     alt="Screenshot of a tool that lists hundreds of rooms with labels A10, A11, paired with arrays of 6 labels"
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -336,7 +336,7 @@ And... success!!
   <img
     src="primus_solution.jpg"
     alt="A sketch of six hexagons with all edges connected via lines"
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -361,7 +361,7 @@ that would do the door-pair-picking for me.
   <img
     src="secundus_2_cropped.png"
     alt="The earlier CLI, now with color coding and automated merging commands"
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -383,7 +383,7 @@ wall and I gave up for the evening.
   <img
     src="secundus_fail_cropped.png"
     alt="An exception thrown in the CLI labeled 'Contradiction'"
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
@@ -443,7 +443,7 @@ planning to join again next year!
   <img
     src="9x9.jpg"
     alt="Me, sitting at a 9x9 board"
-    width="50%"
+    width="75%"
     		min-width="340px"
 		max-width="600px"
   />
