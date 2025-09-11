@@ -27,8 +27,14 @@ allows you to go back and try your hand even if you missed it. We did just that
 24-hour practice session in advance to set up our tooling and figure out what
 works well.
 
-![Practice session sequence](practice.gif)<br />
-_Pair programming with, as expected, several Go breaks_
+<p align="center">
+    <img
+        src="practice.gif"
+        alt="Practice session sequence"
+        width="50%"
+    />
+    _Pair programming with, as expected, several Go breaks_
+</p>
 
 What we learned was 1) even though we wanted to use different programming
 languages, we could collaborate in TypeScript as our *lingua franca* and 2) there
@@ -195,11 +201,11 @@ out our own version of the competition server for testing.[^server_mistake]
     the way we had been in our text file. But in fact, Vim handled lookup
     surprisingly well! If it ain't broke, don't fix it.
 
-[^server_mistake]: We were also penalized for the number of times we talked to
-    the server. Thanks to early testing--either a bug in the organizers' code or,
+[^server_mistake]: We were also penalized for the number of times we _submitted_
+    a plan. Thanks to early testing--either a bug in the organizers' code or,
     more likely, user error--we were working under the mistaken impression that
-    every time we talked to the server our score got worse, even if we reshuffled
-    the rooms.
+    every time we submitted our score got permanently worse, even if we
+    reshuffled the rooms.
 
 ![Working on on-screen hexagons with annotations](GUI.jpg)
 
@@ -216,11 +222,9 @@ start from the beginning again with this in mind, you usually learn even more!
 It seemed like this approach _could_ get us to an answer with enough dumb effort.
 But you had to be absolutely sure of your proof that two hexes were the same, and
 it was hard to fix your mistakes once you had made them. Maybe, Pandu mused,
-since backtracking solutions worked for sudoku puzzles, that would work here? We
-could see from the leaderboard that some teams had found perfect solutions to all
-the available problems, so maybe it was something like that. But it wasn't
-obvious to us how that would work. Convinced enough elbow grease could go the
-distance, I unfortunatley forged ahead until 4am without success.
+since backtracking solutions worked for sudoku puzzles, that would work here? But
+it wasn't obvious to us how that would work. Convinced enough elbow grease could
+go the distance, I unfortunatley forged ahead until 4am without success.
 
 ![Sequence of photos ending in sitting at a desk until late](dayof.gif)<br />
 _Descent into madness_
