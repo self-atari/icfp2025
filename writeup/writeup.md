@@ -30,10 +30,10 @@ works well.
 ![Practice session sequence](practice.gif)<br />
 _Pair programming with, as expected, several Go breaks_
 
-What we learned was 1) despite differing language preferences, we could
-collaborate in TypeScript as our *lingua franca* and 2) there was a very real
-risk that the problem would be hard enough that we wouldn't score any points at
-all.[^2006] Accordingly, we had a modest goal: get on the board.
+What we learned was 1) even though we wanted to use different programming
+languages, we could collaborate in TypeScript as our *lingua franca* and 2) there
+was a very real risk that the problem would be hard enough that we wouldn't score
+any points at all.[^2006] Accordingly, we had a modest goal: get on the board.
 
 [^2006]: We encountered some very difficult-to-trace number overflow when writing
     32-bit virtual registers. Not a problem in other languages we tried! A
@@ -54,23 +54,20 @@ of Lambdas" to read as much as they can (again, FP \~flavor\~).
 
 [^puns]: Puns on _The Name of the Rose_ and computer scientists John Backus and J. Roger Hindley
 
-Unfortunately, the Library is built as an enormous maze of hexagonal rooms and
-there isn't a map, so we'll need to make our own. Worse, it's so hard to read the
-names of the rooms that we can only ever see the first 'letter' (0-3, but we'll
-write them as 'A', 'B', 'C', or 'D'). Worse still, we can only visit so many
-rooms before the sun rises and we have to have snuck back out!
+But the Library is a maze of rooms with six doors and we have to make our own
+map. Worse, we can only see the first 'letter' of the names of the rooms (0-4,
+but we'll call them 'A', 'B', 'C', or 'D'). And worse again, we can only get so
+far before we've run out of time and have to stop exploring!
 
-We have to plan ahead with a list of which of the six doors we'll walk through to
-come up with a full map. We can start over and follow as many plans as we want,
-but none can be longer than the limit (18 times the number of rooms) and we get a
-better score for using fewer plans. We do this by messaging the competion
-organizers' server. But be careful! If you guess wrong or change which problem
-you're looking at, the rooms get re-randomized.
+We can submit plans for which doors to walk through and we'll hear back which
+rooms we see. We can do this multiple times, but it can never be longer than the
+limit (18 times the number of rooms) and fewer plans gives a better score. Plus,
+if you submit an incorrect map, the rooms get shuffled and you have to start over.
 
 ![A map of four hexagon rooms with lines between sides](aedificium.png)<br />
 _The representation we're given of a simple complete map[^text_adventure]_
 
-[^text_adventure] Coincidentally, the setup is very reminiscent of the kind of text adventure
+[^text_adventure]: Coincidentally, the setup is very reminiscent of the kind of text adventure
     computer games I remember playing as a child (I'm thinking of you,
     [HellHaven](https://www.macintoshrepository.org/9587-hellhaven)):
     ```
@@ -99,17 +96,16 @@ be solved 'by hand'). Next up is six, then twelve, then eighteen...
 
 There are several hard parts to this problem: if you're in a room 'A', how do you
 know _which_ 'A'? And how do you know, after executing a plan, that you've even
-been to every room, not mention every door? We're not even told which door we
+been to every room, not to mention every door? We're not even told which door we
 came _in_ through! We _are_ told two extra things: every room is reachable, and
 there are roughly equal counts of every letter.[^counts]
 
 [^counts]: So for 6 rooms you might have 2 'A's, 1 'B', 2 'C's, and 1 'D'.
 
-First we recognized at least one key fact: a room is identifiable by the
-combination of its label and the labels of all the rooms it connects to. In other
-words, every room has a 7-letter 'name'. So maybe you could gradually fill out
-letters in the names while keeping track of the other ones you've already seen,
-then compare the two?
+First we recognized a key fact: a room is identifiable by the combination of its
+name and the names of all the rooms it connects to. In other words, every room
+has a 7-letter 'ID'. So maybe you could gradually fill out the IDs while keeping
+track of ones you've already seen, then compare the two?
 
 ```
 currently in __B_CD_
@@ -121,10 +117,9 @@ might be:
     ...
 ```
 
-That still leaves coming up with a good path that gets you to all the rooms.  We
+That still leaves coming up with a good path that gets you to all the rooms. We
 couldn't hurt ourselves too much on the tutorial problem, so we decided to just
-pick something and see what we learned. We had 54 steps to choose--why not just
-pick some repeating patterns of 6 and piece them together?
+pick some repeating patterns and see what we learned.
 
 ![Both of us sitting at a kitchen table with pads of paper and a
 laptop](pen_and_paper.jpg)<br />
@@ -145,13 +140,11 @@ the same room, did the doors connect to each other? Or were they both self-doors
 
 ![Two solutions for the same problem](disambiguation.png)
 
-Luckily, as we checked, either solution was considered correct. So all we had to
-do was find out where every door went, and then, when multiple doors connected
-two rooms together, we could just decide which pairs went together.
+Luckily, as we checked, both were considered correct. So all we had to do was
+find out where every door went, and then, when multiple doors connected two rooms
+together, we could just decide which pairs went together.
 
-To make things more readable, we paired our plan with the result and adopted our
-naming scheme of 'A', 'B'... so we could just read what we had done in a text
-editor.
+To make things more readable, we formatted what we learned in a text editor.
 
 ![Text editor with lines of - A => 1, - B => 0, ...](probatio.png)<br />
 _Vim: that most practical of programming langauges_
@@ -165,8 +158,8 @@ _Alas, no points for the tutorial. Not on the board yet._
 
 ## Primus
 
-Next up was _Primus_, a set of six rooms. Now there were guaranteed to be at
-least two pairs of rooms that had the same name. How to tell them apart?
+Next up was _Primus_, with six rooms. Now there were guaranteed to be at least
+two pairs of rooms that had the same name. How to tell them apart?
 
 For starters, we could guess by counting the number of times a room showed up.
 Sure enough, it looked like A and B showed up twice as often as C and D. But that
@@ -178,10 +171,10 @@ A. The problem has revealed itself: this is a giant sudoku puzzle!
 
 We were able to prove a couple of other properties to ourselves and started to
 make a little headway.[^fact] Unfortunately, it wasn't always possible to line
-these facts up with each other. We know there are two A's that don't line up in
-door 1, and we know there are two A's that don't line up in door 3. There are
-only two A's so these are the same, but how do we know which door 3 goes with
-which door 1? Our notes started to get a little more convoluted.
+these facts up with each other. Say we know there are two A's that don't line up
+in door 1, and two A's that don't line up in door 3. These pairs must be the
+same, but how do we know which door 3 goes with which door 1? Our notes started
+to get a little more convoluted.
 
 [^fact]: For example, if you start in A then walk through one door
     over and over and still see A, there are only two possibilities: either you've
@@ -195,41 +188,39 @@ of!</em>
 
 That seemed like a good place to start actually writing code. We knew a simple
 app would make this process a lot simpler and faster.[^vim2] Pandu set
-off on building a UI that could replicate what we had done on paper while I built
+about building a UI that could replicate what we had done on paper while I built
 out our own version of the competition server for testing.[^server_mistake]
 
 [^vim2]: We also knew that we could use some code for looking up rooms with doors
-    the way we had been. But in fact, Vim handled lookup surprisingly well! If it
-    ain't broke, don't fix it.
+    the way we had been in our text file. But in fact, Vim handled lookup
+    surprisingly well! If it ain't broke, don't fix it.
 
 [^server_mistake]: We were also penalized for the number of times we talked to
     the server. Thanks to early testing--either a bug in the organizers' code or,
     more likely, user error--we were working under the mistaken impression that
-    every time we talked to the server our score got worse, even if we reset.
+    every time we talked to the server our score got worse, even if we reshuffled
+    the rooms.
 
 ![Working on on-screen hexagons with annotations](GUI.jpg)
 
-Less than an hour later, we put our new tool to the test. And yes, we confirmed,
-it was much easier to click one button than draw hexagons over and over.
+Less than an hour later, we put our new tool to the test. And yes, it was much
+easier to click one button than draw hexagons over and over.
 
 We also added a helpful tool to our sudoku toolbelt. Every time you enter a room,
-you can assume that you've never been there before. When you've done more
-walking, you're sometimes able to prove to yourself that this new room must be
-the same as an old one. At that point, you can 'merge' the rooms together: now
-everything that was true about the new room must also be true of the old. And,
-good news, if you start from the beginning again with this in mind, you usually
-learn even more!
+you start by assuming that you've never been there before. When you've done more
+walking, you can sometimes prove that this new room must be the same as an old
+one. At that point, you can 'merge' the rooms together: now everything that was
+true about the new room must also be true of the old. And, good news, if you
+start from the beginning again with this in mind, you usually learn even more!
 
-It seemed likely this approach _could_ get us to an answer, if we worked at it
-hard enough. There was just one problem: you had to be absolutely sure of your
-proof that two hexes were the same, and it wasn't easy to find your
-mistakes once you had made them. Perhaps, Pandu mused, since backtracking
-solutions worked for sudoku puzzles, something similar could be applied here? We
-could see from the leaderboard that some teams had found perfect solutions with
-to all the posted problems, so maybe it was something like that. But it wasn't
-obvious to us how that would work. Convinced our UI and enough elbow grease could
-go the distance, I forged ahead trying to think through the problem until an
-unfortunate 4am without success.
+It seemed like this approach _could_ get us to an answer with enough dumb effort.
+But you had to be absolutely sure of your proof that two hexes were the same, and
+it was hard to fix your mistakes once you had made them. Maybe, Pandu mused,
+since backtracking solutions worked for sudoku puzzles, that would work here? We
+could see from the leaderboard that some teams had found perfect solutions to all
+the available problems, so maybe it was something like that. But it wasn't
+obvious to us how that would work. Convinced enough elbow grease could go the
+distance, I unfortunatley forged ahead until 4am without success.
 
 ![Sequence of photos ending in sitting at a desk until late](dayof.gif)<br />
 _Descent into madness_
@@ -238,11 +229,11 @@ _Descent into madness_
 ## Day 2
 
 The next morning I began by doing what I should have done earlier: automating.
-What if we just walked through the entire path, 'creating' a new room every time,
-and then only kept track of which were identical? A command line program could at
-least make sure we didn't forget to do any of those merges when we learned
-something new. Plus, now that we had the mental picture of hexagons, we could
-just think of them directly as lists of room names.[^carcinization]
+What if we just re-walked through the entire path, 'creating' a new room every
+time, and then only kept track of which were identical? A command line program
+could at least make sure we didn't forget to do any merging when we
+learned something new. Plus, now that we had the mental picture of hexagons, we
+could just think of them directly as lists of room names.[^carcinization]
 
 [^carcinization]: It does seem like Pandu and I have our own
     [carcinization](https://xkcd.com/2418/) tendencies when making tools. For
@@ -251,9 +242,9 @@ just think of them directly as lists of room names.[^carcinization]
 ![Screenshot of a tool that lists hundreds of rooms with labels A10, A11, paired with arrays of 6 labels](progress.png)<br />
 _Making progress!_
 
-To my delight, within about two hours of this (only slightly less) manual work, a
-solution emerged! We were both exhausted by this point (and even considering
-giving up) so we were only cautiously optimistic that the approach really
+To my delight, within about two hours of this (only slightly less stupidly)
+manual work, a solution emerged! We were both exhausted by this point (and even
+considering giving up) so we were only cautiously optimistic the approach really
 worked. All we could do was pick which doors went with each other and submit.
 And... success!!
 
@@ -261,17 +252,19 @@ And... success!!
 lines](primus_solution.jpg)<br />
 ___ON. THE. BOARD.___
 
-After this point, we took a long break. It was clear the proofs would get harder
-and harder with more rooms, Pandu was now done working on the contest, and I knew
-I wouldn't have much time the next day. _Secundus_ (12 rooms) seemed possible,
-but unlikely (Pandu very generously gave me 50% odds). More complicated problems had been released and we saw from the leaderboard that some of the regular participants had already solved some, but we assumed those were out of reach for us in the time we had left.
+After this point, we took a long break. It was clear the proofs would get
+significantly harder with more rooms, Pandu was done working on the contest, and
+I knew I wouldn't have much time the next day. _Secundus_ (12 rooms) seemed
+possible, but unlikely (Pandu very generously gave me 50% odds). More complicated
+problems had been released, but we assumed those were out of reach for us in the
+time we had left.
 
 Still hopeful, I spent the evening improving the command line tool, adding
-capabilities I thought I might need. It could handle some of the work for me so I
-didn't have to think about which merges implied other merges. It would also be
-nice to be able to look for rooms I knew had certain properties (like, which rooms
-had a label of A, went through door 1 to a room with a label of B...). And it
-would be nice to have a program that would do the door-pair-picking for me.
+capabilities I thought I might need. It could handle some of the merging for me
+so I didn't have to keep track of implications as I went. It would also be nice
+to be able to look up rooms (like, which rooms had a label of A, went through
+door 1 to a room with a label of B...). And it would be nice to have a program
+that would do the door-pair-picking for me.
 
 ![The earlier CLI, now with color coding and automated merging commands](secundus_2_cropped.png)<br />
 
@@ -282,10 +275,10 @@ and find a _Primus_ solution in about 10 minutes.
 ## Secundus
 
 Secundus's work began fairly late on Sunday. The contest ended at 5am Monday, so
-I had to sprint and hope I got lucky. By the time I had spent about an hour
-working at it, I was too exhausted and short on time to prove that my merges were
-correct and just started making educated guesses. Unsurprisingly, this approach
-did finally hit a brick wall and I gave up for the evening.
+I had to sprint and hope I got lucky. After about an hour working at it, I was
+too exhausted and short on time to prove that my merges were correct and just
+started making guesses. Unsurprisingly, this approach did finally hit a brick
+wall and I gave up for the evening.
 
 ![An exception thrown in the CLI labeled 'Contradiction'](secundus_fail_cropped.png)<br />
 _[If the rule you followed brought you to this, of what use was the rule?](https://www.youtube.com/watch?v=p93w7MpbZRw)_
@@ -293,22 +286,22 @@ _[If the rule you followed brought you to this, of what use was the rule?](https
 
 ## Day four
 
-I woke the next day and immediately realized the implications: merging rooms and
-guessing at the next merge until you solved it or reached a contradiction _was_
-the backtracking solution! If we just maintained a queue of merges with a before
-and after state... oh, right. The contest ended three hours ago. In fact, some
-other teams did use this approach to some success--we just got there a little too
-slowly![^backtracking]
+I woke the next day and immediately realized the implication: guessing at the
+next merge until you solved the puzzle or reached a contradiction _was_ the
+backtracking solution! If we just maintained a queue of merges... oh, right. The
+contest ended three hours ago. In fact, some other teams did use this approach to
+some success--we just got there a little too slowly![^backtracking]
 
-[^backtracking] I have yet to implement it, but an interesting problem with this
+[^backtracking]: I have yet to implement it, but an interesting problem with this
     approach is how to avoid extreme memory growth. Instead of mutating anything
-    in your representation of the rooms, you can keep track of the
-    equivalencies (and handle lookups through) a union-find data
-    structure.[^union] Tracking rooms that are confirmed to be distinct is also a
-    small challenge since every room needs to compare with every room previously
-    checked. You can discard rooms with identical sets of labels (`_A__B_A`),
-    sort that set, and then do some variety of binary search. Maybe there's an
-    even more clever approach?
+    in your representation of the rooms, you can keep track of the equivalencies
+    in (and handle lookups through) a union-find data structure.[^union] Tracking
+    rooms that are confirmed to be distinct is also a small challenge since every
+    room needs to compare with every room previously checked. You can discard
+    rooms with identical sets of IDs (`_A__B_A`), sort that set, and then do some
+    variety of binary search. Maybe there's an even more clever approach? With
+    `N` rooms, if you find `M = ceil(N/4)` distinct rooms with the same name,
+    you've been to every room with that name.
 
 [^union]: In fact, I was thinking about this during the contest before we found
     the solution. It's in a TODO: I have the receipts!
