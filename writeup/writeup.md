@@ -353,8 +353,8 @@ time we had left.
 Still hopeful, I spent the evening improving the command line tool, adding
 capabilities I thought I might need. It could handle some of the merging for me
 so I didn't have to keep track of implications as I went. It would also be nice
-to be able to look up rooms (like, which rooms had a label of A, went through
-door 1 to a room with a label of B...). And it would be nice to have a program
+to be able to look up rooms (like, which rooms had a name of A, went through
+door 1 to a room with a name of B...). And it would be nice to have a program
 that would do the door-pair-picking for me.
 
 <p align="center">
