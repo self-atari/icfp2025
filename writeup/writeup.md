@@ -33,8 +33,10 @@ works well.
         alt="Practice session sequence"
         width="50%"
     />
-    _Pair programming with, as expected, several Go breaks_
 </p>
+<p align="center"><em>
+    Pair programming with, as expected, several Go breaks
+</em></p>
 
 What we learned was 1) even though we wanted to use different programming
 languages, we could collaborate in TypeScript as our *lingua franca* and 2) there
@@ -68,10 +70,17 @@ far before we've run out of time and have to stop exploring!
 We can submit plans for which doors to walk through and we'll hear back which
 rooms we see. We can do this multiple times, but it can never be longer than the
 limit (18 times the number of rooms) and fewer plans gives a better score. Plus,
-if you submit an incorrect map, the rooms get shuffled and you have to start over.
+if you submit an incorrect map, the rooms get shuffled and you have to start over.[^text_adventure]
 
-![A map of four hexagon rooms with lines between sides](aedificium.png)<br />
-_The representation we're given of a simple complete map[^text_adventure]_
+<p align="center">
+      <img
+        src="aedificium.png"
+        alt="A map of four hexagon rooms with lines between sides"
+        width="50%"
+        max-width="600px"
+      />
+    </p>
+    <p align="center"><em>The representation we're given of a simple complete map</em></p>
 
 [^text_adventure]: Coincidentally, the setup is very reminiscent of the kind of text adventure
     computer games I remember playing as a child (I'm thinking of you,
@@ -127,9 +136,15 @@ That still leaves coming up with a good path that gets you to all the rooms. We
 couldn't hurt ourselves too much on the tutorial problem, so we decided to just
 pick some repeating patterns and see what we learned.
 
-![Both of us sitting at a kitchen table with pads of paper and a
-laptop](pen_and_paper.jpg)<br />
-_To start, we picked up that oldest of programming languages: pen and paper._
+<p align="center">
+      <img
+        src="pen_and_paper.jpg"
+        alt="Both of us sitting at a kitchen table with pads of paper and a laptop"
+        width="50%"
+        max-width="600px"
+      />
+</p>
+<p align="center"><em>To start, we picked up that oldest of programming languages: pen and paper.</em></p>
 
 A few things were immediately evident. First, if you always follow the same door,
 you're guaranteed to stop learning anything new after you've followed it as many
@@ -138,13 +153,27 @@ you were able to find your way back to the original room. Any more will just
 repeat the same thing! Second, alternating loops were difficult to disambiguate:
 were you walking back and forth between two rooms? Four?
 
-![Depiction of a two loop vs four loop, both yielding 0-1-0-1-0...](loop.jpg)
+<p align="center">
+  <img
+    src="loop.jpg"
+    alt="Depiction of a two loop vs four loop, both yielding 0-1-0-1-0..."
+    width="50%"
+    max-width="600px"
+  />
+</p>
 
 We also spooked ourselves with the realization that sometimes there was never a
 way to tell two layouts apart. If you're in a room and both doors get you back in
 the same room, did the doors connect to each other? Or were they both self-doors?
 
-![Two solutions for the same problem](disambiguation.png)
+<p align="center">
+  <img
+    src="disambiguation.png"
+    alt="Two solutions for the same problem"
+    width="50%"
+    max-width="600px"
+  />
+</p>
 
 Luckily, as we checked, both were considered correct. So all we had to do was
 find out where every door went, and then, when multiple doors connected two rooms
@@ -152,14 +181,28 @@ together, we could just decide which pairs went together.
 
 To make things more readable, we formatted what we learned in a text editor.
 
-![Text editor with lines of - A => 1, - B => 0, ...](probatio.png)<br />
-_Vim: that most practical of programming langauges_
+<p align="center">
+  <img
+    src="probatio.png"
+    alt="Text editor with lines of - A => 1, - B => 0, ..."
+    width="50%"
+    max-width="600px"
+  />
+</p>
+<p align="center"><em>Vim: that most practical of programming langauges</em></p>
 
 From there it wasn't too hard to work out a solution by looking through the list;
 when you only have three rooms, every letter can only refer to one room!
 
-![Sketch on paper of a hexagon with each edge labeled](probatio_solution.jpg)<br />
-_Alas, no points for the tutorial. Not on the board yet._
+<p align="center">
+  <img
+    src="probatio_solution.jpg"
+    alt="Sketch on paper of a hexagon with each edge labeled"
+    width="50%"
+    max-width="600px"
+  />
+</p>
+<p align="center"><em>Alas, no points for the tutorial. Not on the board yet.</em></p>
 
 
 ## Primus
@@ -188,9 +231,15 @@ to get a little more convoluted.
     So if you've taken an even number of steps, no matter what you must still be in
     the first A.
 
-![Several scattered hexagons with in pencil with annotations](primus_notes.jpg)<br />
-<em>0-indexing makes describing problems harder <strong>and</strong> doors harder to keep track
-of!</em>
+<p align="center">
+  <img
+    src="primus_notes.jpg"
+    alt="Several scattered hexagons with in pencil with annotations"
+    width="50%"
+    max-width="600px"
+  />
+</p>
+<p align="center"><em>0-indexing makes describing problems harder <strong>and</strong> doors harder to keep track of!</em></p>
 
 That seemed like a good place to start actually writing code. We knew a simple
 app would make this process a lot simpler and faster.[^vim2] Pandu set
@@ -207,7 +256,14 @@ out our own version of the competition server for testing.[^server_mistake]
     every time we submitted our score got permanently worse, even if we
     reshuffled the rooms.
 
-![Working on on-screen hexagons with annotations](GUI.jpg)
+<p align="center">
+  <img
+    src="GUI.jpg"
+    alt="Working on on-screen hexagons with annotations"
+    width="50%"
+    max-width="600px"
+  />
+</p>
 
 Less than an hour later, we put our new tool to the test. And yes, it was much
 easier to click one button than draw hexagons over and over.
@@ -226,8 +282,15 @@ since backtracking solutions worked for sudoku puzzles, that would work here? Bu
 it wasn't obvious to us how that would work. Convinced enough elbow grease could
 go the distance, I unfortunatley forged ahead until 4am without success.
 
-![Sequence of photos ending in sitting at a desk until late](dayof.gif)<br />
-_Descent into madness_
+<p align="center">
+  <img
+    src="dayof.gif"
+    alt="Sequence of photos ending in sitting at a desk until late"
+    width="50%"
+    max-width="600px"
+  />
+</p>
+<p align="center"><em>Descent into madness</em></p>
 
 
 ## Day 2
@@ -243,8 +306,15 @@ could just think of them directly as lists of room names.[^carcinization]
     [carcinization](https://xkcd.com/2418/) tendencies when making tools. For
     him, it's graphical UIs in the browser; for me, it's CLIs.
 
-![Screenshot of a tool that lists hundreds of rooms with labels A10, A11, paired with arrays of 6 labels](progress.png)<br />
-_Making progress!_
+<p align="center">
+  <img
+    src="progress.png"
+    alt="Screenshot of a tool that lists hundreds of rooms with labels A10, A11, paired with arrays of 6 labels"
+    width="50%"
+    max-width="600px"
+  />
+</p>
+<p align="center"><em>Making progress!</em></p>
 
 To my delight, within about two hours of this (only slightly less stupidly)
 manual work, a solution emerged! We were both exhausted by this point (and even
@@ -252,9 +322,15 @@ considering giving up) so we were only cautiously optimistic the approach really
 worked. All we could do was pick which doors went with each other and submit.
 And... success!!
 
-![A sketch of six hexagons with all edges connected via
-lines](primus_solution.jpg)<br />
-___ON. THE. BOARD.___
+<p align="center">
+  <img
+    src="primus_solution.jpg"
+    alt="A sketch of six hexagons with all edges connected via lines"
+    width="50%"
+    max-width="600px"
+  />
+</p>
+<p align="center"><em><strong>ON. THE. BOARD.</strong></em></p>
 
 After this point, we took a long break. It was clear the proofs would get
 significantly harder with more rooms, Pandu was done working on the contest, and
@@ -270,7 +346,14 @@ to be able to look up rooms (like, which rooms had a label of A, went through
 door 1 to a room with a label of B...). And it would be nice to have a program
 that would do the door-pair-picking for me.
 
-![The earlier CLI, now with color coding and automated merging commands](secundus_2_cropped.png)<br />
+<p align="center">
+  <img
+    src="secundus_2_cropped.png"
+    alt="The earlier CLI, now with color coding and automated merging commands"
+    width="50%"
+    max-width="600px"
+  />
+</p>
 
 I felt satisfied when I determined that the new tools allowed me to start over
 and find a _Primus_ solution in about 10 minutes.
@@ -284,8 +367,19 @@ too exhausted and short on time to prove that my merges were correct and just
 started making guesses. Unsurprisingly, this approach did finally hit a brick
 wall and I gave up for the evening.
 
-![An exception thrown in the CLI labeled 'Contradiction'](secundus_fail_cropped.png)<br />
-_[If the rule you followed brought you to this, of what use was the rule?](https://www.youtube.com/watch?v=p93w7MpbZRw)_
+<p align="center">
+  <img
+    src="secundus_fail_cropped.png"
+    alt="An exception thrown in the CLI labeled 'Contradiction'"
+    width="50%"
+    max-width="600px"
+  />
+</p>
+<p align="center"><em>
+    <a href="https://www.youtube.com/watch?v=p93w7MpbZRw">
+        If the rule you followed brought you to this, of what use was the rule?
+    </a>
+</em></p>
 
 
 ## Day four
@@ -332,5 +426,12 @@ A couple of observations:
 I'm very thankful to the organizers for setting this up, and we're already
 planning to join again next year!
 
-![Me, sitting at a 9x9 board](9x9.jpg)<br />
-_Obligatory, if unflattering, Go picture_
+<p align="center">
+  <img
+    src="9x9.jpg"
+    alt="Me, sitting at a 9x9 board"
+    width="50%"
+    max-width="600px"
+  />
+</p>
+<p align="center"><em>Obligatory, if unflattering, Go picture</em></p>
