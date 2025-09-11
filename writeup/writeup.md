@@ -60,7 +60,7 @@ PDF](https://icfpcontest2025.github.io/specs/task.pdf) the characters Adso of
 Milner and William of Backus[^puns], who are sneaking into the "Library
 of Lambdas" to read as much as they can (again, FP \~flavor\~).
 
-[^puns]: Puns on _The Name of the Rose_ and computer scientists John Backus and J. Roger Hindley
+[^puns]: Puns on _The Name of the Rose_ and computer scientists Robin Milner and John Backus
 
 But the Library is a maze of rooms with six doors and we have to make our own
 map. Worse, we can only see the first 'letter' of the names of the rooms (0-4,
