@@ -435,6 +435,12 @@ A couple of observations:
 - Stateful APIs (the organizers' server) are a bit of a pain.
 - Writing about the contest is also great and I hope more teams do it! Reading
   writeups afterwards might actually be the best part of the contest.
+- Naming conventions shape everything, even before code. The way we talked about
+  the problem morphed several times during the contest to keep things
+  unambiguous, and what we wrote reflects those conventions.
+- Sleep is _essential_. All of my best ideas came after getting rest; when given
+  the choice between waiting until tomorrow or trying \~just a little longer\~ on
+  something, always choose waiting and regular sleep.
 
 I'm very thankful to the organizers for setting this up, and we're already
 planning to join again next year!
