@@ -1,0 +1,129 @@
+:root {
+  --space: 70px;
+  --diag-label--y-offset: 0.6;
+  --diag-label--x-offset: 0.5;
+  --side-label--x-offset: 0.5;
+}
+
+.hexes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+input {
+  border: 0;
+  background-color: hsla(0, 0%, 100%, 0.3);
+}
+input[value=""]:not(:hover) {
+  opacity: 0;
+}
+input:focus {
+  outline: 1px solid hsl(210, 100%, 50%);
+  background-color: white;
+}
+
+.hex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid black;
+  width: calc(var(--space) * 5.5);
+  height: calc(var(--space) * 4.5);
+  position: relative;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+.hex .remove {
+  position: absolute;
+  right: 0;
+  border: 0;
+  background-color: lightgray;
+  font-size: 14px;
+  padding: 5px 10px;
+}
+
+.hex input {
+  text-align: center;
+  width: calc(var(--space) * 0.8);
+  font-size: calc(var(--space) * 0.3);
+}
+
+.hex .edge-input-container-2 {
+  margin-left: calc(var(--space) * var(--side-label--x-offset) * -1);
+  margin-right: calc(var(--space) * var(--side-label--x-offset));
+}
+.hex .edge-input-container-5 {
+  margin-left: calc(var(--space) * var(--side-label--x-offset));
+  margin-right: calc(var(--space) * var(--side-label--x-offset) * -1);
+}
+
+.hex .top-row, .hex .bottom-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:center;
+  width: 100%;
+  gap: calc(var(--space) * var(--diag-label--x-offset));
+}
+
+.hex .top-row {
+  margin-top: calc(var(--space) * var(--diag-label--y-offset));
+  margin-bottom: calc(var(--space) * var(--diag-label--y-offset) * -1);
+}
+
+.hex .bottom-row {
+  margin-top: calc(var(--space) * var(--diag-label--y-offset) * -1);
+  margin-bottom: calc(var(--space) * var(--diag-label--y-offset));
+}
+
+.hex .middle-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.hex-image {
+  /* Adapted from https://stackoverflow.com/a/78888727 */
+  aspect-ratio: cos(30deg);
+  clip-path: polygon(-50% 50%, 50% 100%, 150% 50%, 50% 0);
+  width: calc(var(--space) * 3);
+  background: lightgray;
+  z-index: 10;
+}
+
+.hex input {
+  z-index: 100;
+  font-weight: bold;
+}
+.hex input::placeholder {
+  color: hsl(0, 0%, 70%);
+  font-weight: normal;
+}
+
+.hex .edge-input-container {
+  display: flex;
+  z-index: 100;
+}
+
+.hex .overlap-container {
+  aspect-ratio: cos(30deg);
+  width: calc(var(--space) * 3);
+  position: relative;
+}
+.hex .overlap-container > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.hex .hex-label-container {
+  aspect-ratio: cos(30deg);
+  width: calc(var(--space) * 3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hex input.hex-label {
+  font-size: calc(var(--space) * 0.5);
+  width: calc(var(--space) * 1.2);
+}
