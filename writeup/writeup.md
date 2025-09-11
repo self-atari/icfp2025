@@ -77,7 +77,8 @@ if you submit an incorrect map, the rooms get shuffled and you have to start ove
         src="aedificium.png"
         alt="A map of four hexagon rooms with lines between sides"
         width="50%"
-        max-width="600px"
+        		min-width="340px"
+		max-width="600px"
       />
     </p>
     <p align="center"><em>The representation we're given of a simple complete map</em></p>
@@ -141,7 +142,8 @@ pick some repeating patterns and see what we learned.
         src="pen_and_paper.jpg"
         alt="Both of us sitting at a kitchen table with pads of paper and a laptop"
         width="50%"
-        max-width="600px"
+        		min-width="340px"
+		max-width="600px"
       />
 </p>
 <p align="center"><em>To start, we picked up that oldest of programming languages: pen and paper.</em></p>
@@ -158,7 +160,8 @@ were you walking back and forth between two rooms? Four?
     src="loop.jpg"
     alt="Depiction of a two loop vs four loop, both yielding 0-1-0-1-0..."
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 
@@ -171,7 +174,8 @@ the same room, did the doors connect to each other? Or were they both self-doors
     src="disambiguation.png"
     alt="Two solutions for the same problem"
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 
@@ -186,7 +190,8 @@ To make things more readable, we formatted what we learned in a text editor.
     src="probatio.png"
     alt="Text editor with lines of - A => 1, - B => 0, ..."
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 <p align="center"><em>Vim: that most practical of programming langauges</em></p>
@@ -199,7 +204,8 @@ when you only have three rooms, every letter can only refer to one room!
     src="probatio_solution.jpg"
     alt="Sketch on paper of a hexagon with each edge labeled"
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 <p align="center"><em>Alas, no points for the tutorial. Not on the board yet.</em></p>
@@ -236,7 +242,8 @@ to get a little more convoluted.
     src="primus_notes.jpg"
     alt="Several scattered hexagons with in pencil with annotations"
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 <p align="center"><em>0-indexing makes describing problems harder <strong>and</strong> doors harder to keep track of!</em></p>
@@ -261,7 +268,8 @@ out our own version of the competition server for testing.[^server_mistake]
     src="GUI.jpg"
     alt="Working on on-screen hexagons with annotations"
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 
@@ -287,7 +295,8 @@ go the distance, I unfortunatley forged ahead until 4am without success.
     src="dayof.gif"
     alt="Sequence of photos ending in sitting at a desk until late"
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 <p align="center"><em>Descent into madness</em></p>
@@ -311,7 +320,8 @@ could just think of them directly as lists of room names.[^carcinization]
     src="progress.png"
     alt="Screenshot of a tool that lists hundreds of rooms with labels A10, A11, paired with arrays of 6 labels"
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 <p align="center"><em>Making progress!</em></p>
@@ -327,7 +337,8 @@ And... success!!
     src="primus_solution.jpg"
     alt="A sketch of six hexagons with all edges connected via lines"
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 <p align="center"><em><strong>ON. THE. BOARD.</strong></em></p>
@@ -351,7 +362,8 @@ that would do the door-pair-picking for me.
     src="secundus_2_cropped.png"
     alt="The earlier CLI, now with color coding and automated merging commands"
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 
@@ -372,7 +384,8 @@ wall and I gave up for the evening.
     src="secundus_fail_cropped.png"
     alt="An exception thrown in the CLI labeled 'Contradiction'"
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 <p align="center"><em>
@@ -431,7 +444,8 @@ planning to join again next year!
     src="9x9.jpg"
     alt="Me, sitting at a 9x9 board"
     width="50%"
-    max-width="600px"
+    		min-width="340px"
+		max-width="600px"
   />
 </p>
 <p align="center"><em>Obligatory, if unflattering, Go picture</em></p>
